@@ -150,7 +150,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad0757b1d0f55d94fa146537b269e1b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile: {fileID: 4142692226621997512, guid: 9e1a3b701e9df884ab903e5292b4b2aa, type: 3}
+  tilePrefabs:
+  - {fileID: 4142692226621997512, guid: 9e1a3b701e9df884ab903e5292b4b2aa, type: 3}
+  - {fileID: 4947258245635789460, guid: 657942d34180efb4d8fe09d1eca89e7c, type: 3}
+  - {fileID: 6612881421906899030, guid: b638b92c73c639e4fbb76d574383b4ff, type: 3}
+  - {fileID: 1002452580724352059, guid: f97f74e7b60d0914cb5a297fbceff8d4, type: 3}
+  - {fileID: 223589049390125222, guid: 9db0272df671c6241b2348be2c40068c, type: 3}
+  - {fileID: 6188473870584276749, guid: 430229c7b2c8df142a472c9aed012220, type: 3}
 --- !u!4 &333745865
 Transform:
   m_ObjectHideFlags: 0
