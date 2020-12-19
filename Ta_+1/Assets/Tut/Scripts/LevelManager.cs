@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameObject[] tilePrefabs;
 
+    [SerializeField]
+    private CameraMovement cameraMovement;
     public float TileSize => tilePrefabs[0].GetComponent<SpriteRenderer>().bounds.size.x;
 
     // Start is called before the first frame update
@@ -37,17 +39,26 @@ public class LevelManager : MonoBehaviour
 
             for (int x = 0; x < maxXSize; x++)
             {
-                PlaceTile(newTiles[x], x, y, worldStartPosition);
+                var currentTile = PlaceTile(newTiles[x], x, y, worldStartPosition);
+
+                if (x == maxXSize - 1 && y == maxYSize - 1) // TODO Will be fixed soon™.
+                {
+                    var maxTile = currentTile;
+                    cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
+                }
             }
         }
+
     }
 
-    private void PlaceTile(char tileType, int x, int y, Vector3 worldStartPosition)
+    private Vector3 PlaceTile(char tileType, int x, int y, Vector3 worldStartPosition)
     {
         int tileIndex = int.Parse(tileType.ToString());
 
         GameObject newTile = Instantiate(tilePrefabs[tileIndex]);
         newTile.transform.position = new Vector3(worldStartPosition.x + TileSize * x, worldStartPosition.y - TileSize * y);
+
+        return newTile.transform.position;
     }
 
     private string[] ReadLevelTextFile()
