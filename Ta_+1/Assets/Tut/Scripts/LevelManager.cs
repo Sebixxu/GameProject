@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField]
     private CameraMovement cameraMovement;
+
+    public Dictionary<Point, TileScript> Tiles { get; set; }
     public float TileSize => tilePrefabs[0].GetComponent<SpriteRenderer>().bounds.size.x;
 
     // Start is called before the first frame update
@@ -26,39 +28,38 @@ public class LevelManager : MonoBehaviour
 
     private void CreateLevel()
     {
+        Tiles = new Dictionary<Point, TileScript>();
+
         string[] mapData = ReadLevelTextFile();
 
-        int maxXSize = mapData[0].ToCharArray().Length;
-        int maxYSize = mapData.Length;
+        int maxXMapSize = mapData[0].ToCharArray().Length;
+        int maxYMapSize = mapData.Length;
 
         var worldStartPosition = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
 
-        for (int y = 0; y < maxYSize; y++)
+        for (int y = 0; y < maxYMapSize; y++)
         {
             char[] newTiles = mapData[y].ToCharArray();
 
-            for (int x = 0; x < maxXSize; x++)
+            for (int x = 0; x < maxXMapSize; x++)
             {
-                var currentTile = PlaceTile(newTiles[x], x, y, worldStartPosition);
-
-                if (x == maxXSize - 1 && y == maxYSize - 1) // TODO Will be fixed soon™.
-                {
-                    var maxTile = currentTile;
-                    cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
-                }
+                PlaceTile(newTiles[x], x, y, worldStartPosition);
             }
         }
 
+        var maxTile = Tiles[new Point(maxXMapSize - 1, maxYMapSize - 1)].transform.position;
+        cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
     }
 
-    private Vector3 PlaceTile(char tileType, int x, int y, Vector3 worldStartPosition)
+    private void PlaceTile(char tileType, int x, int y, Vector3 worldStartPosition)
     {
         int tileIndex = int.Parse(tileType.ToString());
 
+        var tilePosition = new Point(x, y);
         var newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
-        newTile.Setup(new Point(x, y), new Vector3(worldStartPosition.x + TileSize * x, worldStartPosition.y - TileSize * y, 0));
-
-        return newTile.transform.position;
+        
+        newTile.Setup(tilePosition, new Vector3(worldStartPosition.x + TileSize * x, worldStartPosition.y - TileSize * y, 0));
+        Tiles.Add(tilePosition, newTile);
     }
 
     private string[] ReadLevelTextFile()
