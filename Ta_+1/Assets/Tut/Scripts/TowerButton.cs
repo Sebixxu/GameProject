@@ -6,8 +6,11 @@ public class TowerButton : MonoBehaviour
 {
     [SerializeField]
     private GameObject towerPrefab;
+    [SerializeField]
+    private Sprite iconSprite;
 
     public GameObject TowerPrefab => towerPrefab;
+    public Sprite IconSprite => iconSprite;
 
     // Start is called before the first frame update
     void Start()
