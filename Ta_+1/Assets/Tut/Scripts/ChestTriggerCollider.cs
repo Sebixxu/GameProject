@@ -12,6 +12,7 @@ public class ChestTriggerCollider : MonoBehaviour
         if (player != null)
         {
             Debug.Log("OPENING LECIMY");
+            //collider.enabled = false; zróbic to na poszczególnym a nie na grupie
         }
     }
 }
