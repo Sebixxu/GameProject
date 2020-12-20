@@ -7,6 +7,9 @@ public class CameraMovement : MonoBehaviour
     [SerializeField]
     private float cameraSpeed = 0;
 
+    [SerializeField]
+    private bool turnOnCameraMovement = false;
+
     private float xMax;
     private float yMin;
 
@@ -19,7 +22,8 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ProcessInput();
+        if (turnOnCameraMovement)
+            ProcessInput();
     }
 
     private void ProcessInput()
