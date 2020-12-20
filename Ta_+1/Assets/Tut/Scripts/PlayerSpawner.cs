@@ -30,7 +30,7 @@ public class PlayerSpawner : MonoBehaviour
 
     private void SpawnPlayer()
     {
-        var spawnWorldPosition = _levelManager.Tiles[new Point(spawnXCord, spawnYCord)].transform.position;
+        var spawnWorldPosition = _levelManager.Tiles[new Point(spawnXCord, spawnYCord)].GetComponent<TileScript>().WorldPosition;
 
         Instantiate(playerPrefab, spawnWorldPosition, Quaternion.identity);
     }
