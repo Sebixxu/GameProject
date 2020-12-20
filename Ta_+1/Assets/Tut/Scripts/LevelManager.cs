@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
-    //TODO Dodać za pewne singleton
-
     [SerializeField]
     private GameObject[] tilePrefabs;
 
@@ -61,7 +59,6 @@ public class LevelManager : MonoBehaviour
         var newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
 
         newTile.Setup(tilePosition, new Vector3(worldStartPosition.x + TileSize * x, worldStartPosition.y - TileSize * y, 0));
-        Tiles.Add(tilePosition, newTile);
     }
 
     private string[] ReadLevelTextFile()
