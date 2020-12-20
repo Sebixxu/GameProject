@@ -20,6 +20,9 @@ public class Hover : Singleton<Hover>
 
     private void FollowMouse()
     {
+        if (!_spriteRenderer.enabled)
+            return;
+
         var position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         position = new Vector3(position.x, position.y, 0);
 
@@ -34,6 +37,8 @@ public class Hover : Singleton<Hover>
 
     public void DeactivateHover()
     {
+        GameManager.Instance.ClickedTowerButton = null;
+
         _spriteRenderer.sprite = null;
         _spriteRenderer.enabled = false;
     }

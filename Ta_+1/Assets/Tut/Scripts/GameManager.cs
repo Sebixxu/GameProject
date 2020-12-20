@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public TowerButton ClickedTowerButton { get; private set; }
+    public TowerButton ClickedTowerButton { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        
+        HandleEscape();
     }
 
     public void PickTower(TowerButton towerButton)
@@ -26,6 +26,14 @@ public class GameManager : Singleton<GameManager>
 
     public void BuyTower()
     {
-        ClickedTowerButton = null;
+        Hover.Instance.DeactivateHover();
+    }
+
+    private void HandleEscape()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Hover.Instance.DeactivateHover();
+        }
     }
 }
