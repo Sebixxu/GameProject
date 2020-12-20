@@ -7,10 +7,11 @@ public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField]
     private GameObject[] tilePrefabs;
-
     [SerializeField]
     private CameraMovement cameraMovement;
-
+    [SerializeField]
+    private Transform mapParentTransform;
+    
     public Dictionary<Point, TileScript> Tiles { get; set; }
     public float TileSize => tilePrefabs[0].GetComponent<SpriteRenderer>().bounds.size.x;
 
@@ -58,7 +59,7 @@ public class LevelManager : Singleton<LevelManager>
         var tilePosition = new Point(x, y);
         var newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
 
-        newTile.Setup(tilePosition, new Vector3(worldStartPosition.x + TileSize * x, worldStartPosition.y - TileSize * y, 0));
+        newTile.Setup(tilePosition, new Vector3(worldStartPosition.x + TileSize * x, worldStartPosition.y - TileSize * y, 0), mapParentTransform);
     }
 
     private string[] ReadLevelTextFile()
