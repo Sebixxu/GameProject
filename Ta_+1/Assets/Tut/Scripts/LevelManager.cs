@@ -11,6 +11,8 @@ public class LevelManager : Singleton<LevelManager>
     private CameraMovement cameraMovement;
     [SerializeField]
     private Transform mapParentTransform;
+
+    private Point mapSize;
     
     public Dictionary<Point, TileScript> Tiles { get; set; }
     public float TileSize => tilePrefabs[0].GetComponent<SpriteRenderer>().bounds.size.x;
@@ -35,6 +37,7 @@ public class LevelManager : Singleton<LevelManager>
 
         int maxXMapSize = mapData[0].ToCharArray().Length;
         int maxYMapSize = mapData.Length;
+        mapSize = new Point(maxXMapSize, maxYMapSize);
 
         var worldStartPosition = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
 
@@ -50,6 +53,11 @@ public class LevelManager : Singleton<LevelManager>
 
         var maxTile = Tiles[new Point(maxXMapSize - 1, maxYMapSize - 1)].transform.position;
         cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
+    }
+
+    public bool InBounds(Point position)
+    {
+        return position.X >= 0 && position.Y >= 0 && position.X < mapSize.X && position.Y < mapSize.Y;
     }
 
     private void PlaceTile(char tileType, int x, int y, Vector3 worldStartPosition)

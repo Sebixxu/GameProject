@@ -15,6 +15,7 @@ public class TileScript : MonoBehaviour
     public Point GridPosition { get; private set; }
     public bool IsEmpty { get; private set; }
     public bool DebugOn { get; set; }
+    public bool Walkable { get; set; }
     public Vector2 WorldPosition
     {
         get
@@ -39,6 +40,7 @@ public class TileScript : MonoBehaviour
     public void Setup(Point gridPosition, Vector3 worldPosition, Transform parent)
     {
         IsEmpty = true;
+        Walkable = true;
 
         GridPosition = gridPosition;
         transform.position = worldPosition;
@@ -76,6 +78,7 @@ public class TileScript : MonoBehaviour
         GameManager.Instance.BuyTower();
 
         IsEmpty = false;
+        Walkable = false;
         ColorTile(defaultColor);
     }
 

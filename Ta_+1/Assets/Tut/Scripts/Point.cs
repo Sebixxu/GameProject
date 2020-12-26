@@ -12,4 +12,14 @@ public struct Point
         X = x;
         Y = y;
     }
+
+    public static bool operator ==(Point x, Point y)
+    {
+        return x.X == y.X && x.Y == y.Y;
+    }
+
+    public static bool operator !=(Point x, Point y)
+    {
+        return x.X != y.X || x.Y != y.Y;
+    }
 }
