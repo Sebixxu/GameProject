@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class AStar
@@ -14,5 +15,20 @@ public static class AStar
         {
             nodes.Add(tile.GridPosition, new Node(tile));
         }
+    }
+
+    public static void GetPath(Point startPoint)
+    {
+        if (nodes == null)
+        {
+            CreateNodes();
+        }
+
+        HashSet<Node> openList = new HashSet<Node>();
+        Node currentNode = nodes[startPoint];
+
+        openList.Add(currentNode);
+
+        GameObject.Find("Debug").GetComponent<AStarDebug>().DebugPath(openList);
     }
 }
