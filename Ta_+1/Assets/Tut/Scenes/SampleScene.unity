@@ -621,6 +621,8 @@ MonoBehaviour:
   goalTileScript: {fileID: 0}
   arrowPrefab: {fileID: 7723234548210326015, guid: 49894b92b7eb3cd419597a16298acfaa,
     type: 3}
+  debugTilePrefab: {fileID: 7925314173387831130, guid: f6932dc479d4ba044b1f1504fd8e3d89,
+    type: 3}
 --- !u!4 &935104485
 Transform:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class TileScript : MonoBehaviour
     private Color32 emptyColor = new Color32(96, 255, 90, 255);
     private Color32 defaultColor = Color.white;
 
-    public SpriteRenderer SpriteRenderer => _spriteRenderer;
+    //public SpriteRenderer SpriteRenderer => _spriteRenderer;
     public Point GridPosition { get; private set; }
     public bool IsEmpty { get; private set; }
     public bool DebugOn { get; set; }
