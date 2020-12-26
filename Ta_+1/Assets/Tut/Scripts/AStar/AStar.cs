@@ -38,7 +38,11 @@ public static class AStar
                 if (LevelManager.Instance.InBounds(neighborPoint) && LevelManager.Instance.Tiles[neighborPoint].Walkable  && neighborPoint != currentNode.GridPosition)
                 {
                     Node neighbor = nodes[neighborPoint];
-                    neighbor.TileScript.SpriteRenderer.color = Color.yellow; //debug
+
+                    if (!openList.Contains(neighbor))
+                        openList.Add(neighbor);
+
+                    neighbor.CalcValues(currentNode);
                 }
             }
         }

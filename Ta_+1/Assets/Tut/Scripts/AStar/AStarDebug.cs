@@ -7,6 +7,8 @@ public class AStarDebug : MonoBehaviour
     [SerializeField]
     private TileScript startTileScript, goalTileScript;
 
+    [SerializeField]
+    private GameObject arrowPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +57,61 @@ public class AStarDebug : MonoBehaviour
     {
         foreach (var node in openList)
         {
-            node.TileScript.SpriteRenderer.color = Color.black;
+            if(node.TileScript != startTileScript)
+            {
+                node.TileScript.SpriteRenderer.color = Color.black;
+            }
+
+            PointToParent(node, node.TileScript.WorldPosition);
+        }
+    }
+
+    private void PointToParent(Node node, Vector2 position)
+    {
+        if(node.Parent == null)
+            return;
+        
+        GameObject arrow = Instantiate(arrowPrefab, position, Quaternion.identity);
+
+        //Left
+        if (node.GridPosition.X < node.Parent.GridPosition.X && node.GridPosition.Y == node.Parent.GridPosition.Y)
+        {
+            arrow.transform.eulerAngles = new Vector3(0,0,0);
+        }
+        //Bottom Left
+        else if (node.GridPosition.X < node.Parent.GridPosition.X && node.GridPosition.Y > node.Parent.GridPosition.Y)
+        {
+            arrow.transform.eulerAngles = new Vector3(0, 0, 45);
+        }
+        //Bottom
+        else if (node.GridPosition.X == node.Parent.GridPosition.X && node.GridPosition.Y > node.Parent.GridPosition.Y)
+        {
+            arrow.transform.eulerAngles = new Vector3(0, 0, 90);
+        }
+        //Bottom right
+        else if (node.GridPosition.X > node.Parent.GridPosition.X && node.GridPosition.Y > node.Parent.GridPosition.Y)
+        {
+            arrow.transform.eulerAngles = new Vector3(0, 0, 135);
+        }
+        //Right
+        else if (node.GridPosition.X > node.Parent.GridPosition.X && node.GridPosition.Y == node.Parent.GridPosition.Y)
+        {
+            arrow.transform.eulerAngles = new Vector3(0, 0, 180);
+        }
+        //Top right
+        else if (node.GridPosition.X > node.Parent.GridPosition.X && node.GridPosition.Y < node.Parent.GridPosition.Y)
+        {
+            arrow.transform.eulerAngles = new Vector3(0, 0, 225);
+        }
+        //Top
+        else if (node.GridPosition.X == node.Parent.GridPosition.X && node.GridPosition.Y < node.Parent.GridPosition.Y)
+        {
+            arrow.transform.eulerAngles = new Vector3(0, 0, 270);
+        }
+        //Top left
+        else if (node.GridPosition.X < node.Parent.GridPosition.X && node.GridPosition.Y < node.Parent.GridPosition.Y)
+        {
+            arrow.transform.eulerAngles = new Vector3(0, 0, 315);
         }
     }
 }

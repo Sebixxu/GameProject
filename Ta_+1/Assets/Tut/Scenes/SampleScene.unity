@@ -619,6 +619,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTileScript: {fileID: 0}
   goalTileScript: {fileID: 0}
+  arrowPrefab: {fileID: 7723234548210326015, guid: 49894b92b7eb3cd419597a16298acfaa,
+    type: 3}
 --- !u!4 &935104485
 Transform:
   m_ObjectHideFlags: 0
