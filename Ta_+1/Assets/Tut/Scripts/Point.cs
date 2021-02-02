@@ -22,4 +22,9 @@ public struct Point
     {
         return x.X != y.X || x.Y != y.Y;
     }
+
+    public static Point operator -(Point x, Point y)
+    {
+        return new Point(x.X - y.X, x.Y - y.Y);
+    }
 }

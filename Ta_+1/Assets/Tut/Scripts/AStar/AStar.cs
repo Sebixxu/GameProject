@@ -44,7 +44,20 @@ public static class AStar
 
                     if (LevelManager.Instance.InBounds(neighborPoint) && LevelManager.Instance.Tiles[neighborPoint].Walkable && neighborPoint != currentNode.GridPosition)
                     {
-                        var gCost = Math.Abs(x - y) == 1 ? 10 : 14;
+                        int gCost;
+                        if (Math.Abs(x - y) == 1)
+                            gCost = 10;
+                        else
+                        {
+                            if (!IsConnectedDiagonally(currentNode, nodes[neighborPoint]))
+                            {
+                                continue;
+                                
+                            }
+
+                            gCost = 14;
+
+                        }
 
                         Node neighbor = nodes[neighborPoint];
 
@@ -84,6 +97,27 @@ public static class AStar
             }
         }
 
-        GameObject.Find("Debug").GetComponent<AStarDebug>().DebugPath(openList, closedList);
+        GameObject.Find("Debug").GetComponent<AStarDebug>().DebugPath(openList, closedList, finalPath);
+    }
+
+    private static bool IsConnectedDiagonally(Node currentNode, Node neighborNode)
+    {
+        Point direction = neighborNode.GridPosition - currentNode.GridPosition;
+
+        Point first = new Point(currentNode.GridPosition.X + direction.X, currentNode.GridPosition.Y);
+
+        Point second = new Point(currentNode.GridPosition.X, currentNode.GridPosition.Y + direction.Y);
+
+        if (LevelManager.Instance.InBounds(first) && !LevelManager.Instance.Tiles[first].Walkable)
+        {
+            return false;
+        }
+
+        if (LevelManager.Instance.InBounds(second) && !LevelManager.Instance.Tiles[second].Walkable)
+        {
+            return false;
+        }
+
+        return true;
     }
 }
