@@ -24,7 +24,7 @@ public class AStarDebug : MonoBehaviour
         ClickTile();
 
         if(Input.GetKeyDown(KeyCode.Space))
-            AStar.GetPath(startTileScript.GridPosition);
+            AStar.GetPath(startTileScript.GridPosition, goalTileScript.GridPosition);
     }
 
     private void ClickTile()
@@ -64,7 +64,7 @@ public class AStarDebug : MonoBehaviour
         {
             if(node.TileScript != startTileScript)
             {
-                CreateDebugTile(node.TileScript.WorldPosition, Color.cyan);
+                CreateDebugTile(node.TileScript.WorldPosition, Color.cyan, node);
             }
 
             PointToParent(node, node.TileScript.WorldPosition);
@@ -74,7 +74,7 @@ public class AStarDebug : MonoBehaviour
         {
             if (node.TileScript != startTileScript && node.TileScript != goalTileScript)
             {
-                CreateDebugTile(node.TileScript.WorldPosition, Color.yellow);
+                CreateDebugTile(node.TileScript.WorldPosition, Color.yellow, node);
             }
 
             PointToParent(node, node.TileScript.WorldPosition);
@@ -131,9 +131,18 @@ public class AStarDebug : MonoBehaviour
         }
     }
 
-    private void CreateDebugTile(Vector3 worldPosition, Color32 color)
+    private void CreateDebugTile(Vector3 worldPosition, Color32 color, Node node = null)
     {
         GameObject debugTile = Instantiate(debugTilePrefab, worldPosition, Quaternion.identity);
+
+        if (node != null)
+        {
+            var debugTileComponent = debugTile.GetComponent<DebugTile>();
+
+            debugTileComponent.G.text += node.G;
+            debugTileComponent.H.text += node.H;
+            debugTileComponent.F.text += node.F;
+        }
 
         debugTile.GetComponent<SpriteRenderer>().color = color;
     }

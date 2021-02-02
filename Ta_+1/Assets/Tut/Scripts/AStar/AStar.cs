@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,7 +18,7 @@ public static class AStar
         }
     }
 
-    public static void GetPath(Point startPoint)
+    public static void GetPath(Point startPoint, Point goalPoint)
     {
         if (nodes == null)
         {
@@ -39,12 +40,23 @@ public static class AStar
 
                 if (LevelManager.Instance.InBounds(neighborPoint) && LevelManager.Instance.Tiles[neighborPoint].Walkable  && neighborPoint != currentNode.GridPosition)
                 {
+                    int gCost = 0;
+
+                    if (Math.Abs(x - y) == 1)
+                    {
+                        gCost = 10; // Na wprost
+                    }
+                    else
+                    {
+                        gCost = 14; // Na ukos
+                    }
+
                     Node neighbor = nodes[neighborPoint];
 
                     if (!openList.Contains(neighbor))
                         openList.Add(neighbor);
 
-                    neighbor.CalcValues(currentNode);
+                    neighbor.CalcValues(currentNode, nodes[goalPoint], gCost);
                 }
             }
         }
