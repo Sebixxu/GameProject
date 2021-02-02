@@ -28,41 +28,61 @@ public static class AStar
         HashSet<Node> openList = new HashSet<Node>();
         HashSet<Node> closedList = new HashSet<Node>();
 
+        Stack<Node> finalPath = new Stack<Node>();
+
         Node currentNode = nodes[startPoint];
 
         openList.Add(currentNode);
 
-        for (int x = -1; x <= 1; x++)
+        while (openList.Any())
         {
-            for (int y = -1; y <= 1; y++)
+            for (int x = -1; x <= 1; x++)
             {
-                Point neighborPoint = new Point(currentNode.GridPosition.X - x, currentNode.GridPosition.Y - y);
-
-                if (LevelManager.Instance.InBounds(neighborPoint) && LevelManager.Instance.Tiles[neighborPoint].Walkable  && neighborPoint != currentNode.GridPosition)
+                for (int y = -1; y <= 1; y++)
                 {
-                    int gCost = 0;
+                    Point neighborPoint = new Point(currentNode.GridPosition.X - x, currentNode.GridPosition.Y - y);
 
-                    if (Math.Abs(x - y) == 1)
+                    if (LevelManager.Instance.InBounds(neighborPoint) && LevelManager.Instance.Tiles[neighborPoint].Walkable && neighborPoint != currentNode.GridPosition)
                     {
-                        gCost = 10; // Na wprost
+                        var gCost = Math.Abs(x - y) == 1 ? 10 : 14;
+
+                        Node neighbor = nodes[neighborPoint];
+
+                        if (openList.Contains(neighbor))
+                        {
+                            if (currentNode.G + gCost < neighbor.G)
+                            {
+                                neighbor.CalcValues(currentNode, nodes[goalPoint], gCost);
+                            }
+                        }
+                        else if (!closedList.Contains(neighbor))
+                        {
+                            openList.Add(neighbor);
+                            neighbor.CalcValues(currentNode, nodes[goalPoint], gCost);
+                        }
                     }
-                    else
-                    {
-                        gCost = 14; // Na ukos
-                    }
-
-                    Node neighbor = nodes[neighborPoint];
-
-                    if (!openList.Contains(neighbor))
-                        openList.Add(neighbor);
-
-                    neighbor.CalcValues(currentNode, nodes[goalPoint], gCost);
                 }
             }
-        }
 
-        openList.Remove(currentNode);
-        closedList.Add(currentNode);
+            openList.Remove(currentNode);
+            closedList.Add(currentNode);
+
+            if (openList.Any())
+            {
+                currentNode = openList.OrderBy(x => x.F).First();
+            }
+
+            if (currentNode == nodes[goalPoint])
+            {
+                while (currentNode.GridPosition != startPoint)
+                {
+                    finalPath.Push(currentNode);
+                    currentNode = currentNode.Parent;
+                }
+
+                break;
+            }
+        }
 
         GameObject.Find("Debug").GetComponent<AStarDebug>().DebugPath(openList, closedList);
     }

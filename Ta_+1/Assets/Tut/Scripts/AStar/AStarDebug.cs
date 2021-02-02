@@ -74,7 +74,7 @@ public class AStarDebug : MonoBehaviour
         {
             if (node.TileScript != startTileScript && node.TileScript != goalTileScript)
             {
-                CreateDebugTile(node.TileScript.WorldPosition, Color.yellow, node);
+                CreateDebugTile(node.TileScript.WorldPosition, Color.red, node);
             }
 
             PointToParent(node, node.TileScript.WorldPosition);
