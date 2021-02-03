@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class GameManager : Singleton<GameManager>
 {
     public TowerButton ClickedTowerButton { get; set; }
-    
+    public ObjectPool ObjectPool { get; set; }
+
     [SerializeField]
     private Text currencyText;
 
@@ -20,6 +23,11 @@ public class GameManager : Singleton<GameManager>
             currency = value;
             currencyText.text = value + "<color=lime>$</color>";
         }
+    }
+
+    private void Awake()
+    {
+        ObjectPool = GetComponent<ObjectPool>();
     }
 
     // Start is called before the first frame update
@@ -36,7 +44,7 @@ public class GameManager : Singleton<GameManager>
 
     public void PickTower(TowerButton towerButton)
     {
-        if (Currency < towerButton.Price) 
+        if (Currency < towerButton.Price)
             return;
 
         ClickedTowerButton = towerButton;
@@ -45,7 +53,7 @@ public class GameManager : Singleton<GameManager>
 
     public void BuyTower()
     {
-        if (Currency < ClickedTowerButton.Price) 
+        if (Currency < ClickedTowerButton.Price)
             return;
 
         Currency -= ClickedTowerButton.Price;
@@ -58,5 +66,37 @@ public class GameManager : Singleton<GameManager>
         {
             Hover.Instance.DeactivateHover();
         }
+    }
+
+    public void StartWave()
+    {
+        StartCoroutine(SpawnWave());
+    }
+
+    private IEnumerator SpawnWave()
+    {
+        int monsterIndex = UnityEngine.Random.Range(0, 4);
+        string type = String.Empty;
+
+        switch (monsterIndex)
+        {
+            case 0:
+                type = "BlueMonster";
+                break;
+            case 1:
+                type = "RedMonster";
+                break;
+            case 2:
+                type = "GreenMonster";
+                break;
+            case 3:
+                type = "PurpleMonster";
+                break;
+        }
+
+        Monster monster = ObjectPool.GetGameObject(type).GetComponent<Monster>();
+        monster.Spawn();
+
+        yield return new WaitForSeconds(2.5f);
     }
 }

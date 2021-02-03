@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
 {
+    public Portal BluePortal { get; set; }
+    public Dictionary<Point, TileScript> Tiles { get; set; }
+    public float TileSize => tilePrefabs[0].GetComponent<SpriteRenderer>().bounds.size.x;
+
     [SerializeField]
     private GameObject[] tilePrefabs;
     [SerializeField]
     private CameraMovement cameraMovement;
     [SerializeField]
     private Transform mapParentTransform;
+    [SerializeField]
+    private GameObject bluePortalPrefab;
+    [SerializeField]
+    private GameObject redPortalPrefab;
 
     private Point mapSize;
     
-    public Dictionary<Point, TileScript> Tiles { get; set; }
-    public float TileSize => tilePrefabs[0].GetComponent<SpriteRenderer>().bounds.size.x;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +59,20 @@ public class LevelManager : Singleton<LevelManager>
 
         var maxTile = Tiles[new Point(maxXMapSize - 1, maxYMapSize - 1)].transform.position;
         cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
+
+        SpawnPortals();
+    }
+
+    private void SpawnPortals()
+    {
+        var blueSpawn = new Point(0,0);
+        GameObject bluePortal =
+            Instantiate(bluePortalPrefab, Tiles[blueSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+        BluePortal = bluePortal.GetComponent<Portal>();
+        BluePortal.name = "BluePortal";
+
+        var redSpawn = new Point(11, 6);
+        Instantiate(redPortalPrefab, Tiles[redSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
     }
 
     public bool InBounds(Point position)
