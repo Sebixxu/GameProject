@@ -10,6 +10,19 @@ public class LevelManager : Singleton<LevelManager>
     public Dictionary<Point, TileScript> Tiles { get; set; }
     public float TileSize => tilePrefabs[0].GetComponent<SpriteRenderer>().bounds.size.x;
 
+    public Stack<Node> Path
+    {
+        get
+        {
+            if(path == null)
+                GeneratePath();
+
+            return new Stack<Node>(new Stack<Node>(path));
+        }
+        //set { path = value; }
+    }
+
+
     [SerializeField]
     private GameObject[] tilePrefabs;
     [SerializeField]
@@ -22,7 +35,10 @@ public class LevelManager : Singleton<LevelManager>
     private GameObject redPortalPrefab;
 
     private Point mapSize;
-    
+    private Stack<Node> path; //W tej implementacji założenie jest takie że droga obliczana jest raz na początku
+    private Point _blueSpawnPoint;
+    private Point _redSpawnPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,14 +81,14 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SpawnPortals()
     {
-        var blueSpawn = new Point(0,0);
+        _blueSpawnPoint = new Point(0,0);
         GameObject bluePortal =
-            Instantiate(bluePortalPrefab, Tiles[blueSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+            Instantiate(bluePortalPrefab, Tiles[_blueSpawnPoint].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
         BluePortal = bluePortal.GetComponent<Portal>();
         BluePortal.name = "BluePortal";
 
-        var redSpawn = new Point(11, 6);
-        Instantiate(redPortalPrefab, Tiles[redSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+        _redSpawnPoint = new Point(11, 6);
+        Instantiate(redPortalPrefab, Tiles[_redSpawnPoint].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
     }
 
     public bool InBounds(Point position)
@@ -97,5 +113,10 @@ public class LevelManager : Singleton<LevelManager>
         string data = bindData.text.Replace(Environment.NewLine, String.Empty);
 
         return data.Split('-');
+    }
+
+    public void GeneratePath()
+    {
+        path = AStar.GetPath(_blueSpawnPoint, _redSpawnPoint);
     }
 }

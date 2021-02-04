@@ -75,6 +75,8 @@ public class GameManager : Singleton<GameManager>
 
     private IEnumerator SpawnWave()
     {
+        LevelManager.Instance.GeneratePath();
+
         int monsterIndex = UnityEngine.Random.Range(0, 4);
         string type = String.Empty;
 
