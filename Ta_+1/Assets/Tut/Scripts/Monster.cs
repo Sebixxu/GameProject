@@ -50,4 +50,18 @@ public class Monster : MonoBehaviour
             destination = path.Pop().WorldPosition;
         }
     }
+
+    private void Release()
+    {
+        GameManager.Instance.ObjectPool.ReleaseObject(gameObject);
+    }
+
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.CompareTag("RedPortal"))
+    //    {
+    //        Debug.Log("Collided");
+    //        gameObject.SetActive(false);
+    //    }
+    //}
 }

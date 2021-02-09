@@ -96,7 +96,7 @@ public class GameManager : Singleton<GameManager>
                 break;
         }
 
-        Monster monster = ObjectPool.GetGameObject(type).GetComponent<Monster>();
+        Monster monster = ObjectPool.GetObject(type).GetComponent<Monster>();
         monster.Spawn();
 
         yield return new WaitForSeconds(2.5f);
