@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
     private Text currencyText;
 
     private int currency;
+    private Tower selectedTower;
 
     public int Currency
     {
@@ -100,5 +101,25 @@ public class GameManager : Singleton<GameManager>
         monster.Spawn();
 
         yield return new WaitForSeconds(2.5f);
+    }
+
+    public void SelectTower(Tower tower)
+    {
+        if (selectedTower != null)
+            selectedTower.Select(); //Odznaczenie obecnie zaznaczonego obiektu
+
+        selectedTower = tower;
+
+        selectedTower.Select();
+    }
+
+    public void DeselectTower()
+    {
+        if (selectedTower != null)
+        {
+            selectedTower.Select();
+        }
+
+        selectedTower = null;
     }
 }

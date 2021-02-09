@@ -11,11 +11,13 @@ public class TileScript : MonoBehaviour
     private Color32 emptyColor = new Color32(96, 255, 90, 255);
     private Color32 defaultColor = Color.white;
 
+    private Tower myTower;
     //public SpriteRenderer SpriteRenderer => _spriteRenderer;
     public Point GridPosition { get; private set; }
     public bool IsEmpty { get; private set; }
     public bool DebugOn { get; set; }
     public bool Walkable { get; set; }
+
     public Vector2 WorldPosition
     {
         get
@@ -51,16 +53,27 @@ public class TileScript : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (EventSystem.current.IsPointerOverGameObject() || GameManager.Instance.ClickedTowerButton == null)
-            return;
+        if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedTowerButton != null)
+        {
+            if (IsEmpty)
+                ColorTile(emptyColor);
 
-        if (IsEmpty)
-            ColorTile(emptyColor);
-
-        if (!IsEmpty)
-            ColorTile(fullColor);
-        else if (Input.GetMouseButtonDown(0))
-            PlaceTower();
+            if (!IsEmpty)
+                ColorTile(fullColor);
+            else if (Input.GetMouseButtonDown(0))
+                PlaceTower();
+        }
+        else if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedTowerButton == null && Input.GetMouseButtonDown(0))
+        {
+            if (myTower != null)
+            {
+                GameManager.Instance.SelectTower(myTower);
+            }
+            else
+            {
+                GameManager.Instance.DeselectTower();
+            }
+        }
     }
 
     private void OnMouseExit()
@@ -74,6 +87,8 @@ public class TileScript : MonoBehaviour
         var tower = Instantiate(GameManager.Instance.ClickedTowerButton.TowerPrefab, transform.position, Quaternion.identity);
         tower.GetComponent<SpriteRenderer>().sortingOrder = GridPosition.Y;
         tower.transform.SetParent(transform);
+
+        myTower = tower.transform.GetChild(0).GetComponent<Tower>();
 
         GameManager.Instance.BuyTower();
 
