@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
     public Point GridPosition { get; set; }
+    public bool IsActive { get; set; } = true;
 
     [SerializeField]
     private float movementSpeed;
@@ -56,12 +58,14 @@ public class Monster : MonoBehaviour
         GameManager.Instance.ObjectPool.ReleaseObject(gameObject);
     }
 
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.CompareTag("RedPortal"))
-    //    {
-    //        Debug.Log("Collided");
-    //        gameObject.SetActive(false);
-    //    }
-    //}
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("RedPortal"))
+        {
+            Debug.Log("Collided");
+
+            gameObject.SetActive(false);
+            IsActive = false;
+        }
+    }
 }
