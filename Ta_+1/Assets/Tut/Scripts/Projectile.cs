@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Tut.Scripts.Towers;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = Unity.Mathematics.Random;
 
 public class Projectile : MonoBehaviour
 {
     private Monster _target;
     private Tower _parent;
 
+    private ElementType _elementType;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -24,6 +27,7 @@ public class Projectile : MonoBehaviour
     {
         _target = parent.Target;
         _parent = parent;
+        _elementType = parent.ElementType;
     }
 
     private void MoveToTarget()
@@ -44,5 +48,31 @@ public class Projectile : MonoBehaviour
         {
             GameManager.Instance.ObjectPool.ReleaseObject(gameObject);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Monster"))
+        {
+            if (_target.gameObject == other.gameObject)
+            {
+                _target.TakeDamage(_parent.Damage, _elementType);
+                ApplyDebuff();
+
+                GameManager.Instance.ObjectPool.ReleaseObject(gameObject);
+            }
+        }
+    }
+
+    public void ApplyDebuff()
+    {
+        if (_target.ElementType != _elementType)
+        {
+            float roll = UnityEngine.Random.Range(0, 100);
+
+            if (roll <= _parent.ChanceForDebuff)
+                _target.AddDebuff(_parent.GetDebuff());
+        }
+
     }
 }

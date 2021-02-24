@@ -5,13 +5,32 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
 
+public delegate void CurrencyChanged();
+
 public class GameManager : Singleton<GameManager>
 {
+    public event CurrencyChanged Changed;
+
     public TowerButton ClickedTowerButton { get; set; }
     public ObjectPool ObjectPool { get; set; }
 
     [SerializeField]
     private Text currencyText;
+
+    [SerializeField]
+    private Text statText;
+
+    [SerializeField]
+    private float monsterHealth = 10f;
+
+    [SerializeField]
+    private GameObject inGameMenu;
+    
+    [SerializeField]
+    private GameObject optionsMenu;
+
+    [SerializeField] 
+    private GameObject statsPanel;
 
     private int currency;
     private Tower selectedTower;
@@ -23,6 +42,8 @@ public class GameManager : Singleton<GameManager>
         {
             currency = value;
             currencyText.text = value + "<color=lime>$</color>";
+
+            OnCurrencyChanged();
         }
     }
 
@@ -65,6 +86,9 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (GameManager.Instance.ClickedTowerButton == null)
+                ShowInGameMenu();
+
             Hover.Instance.DeactivateHover();
         }
     }
@@ -98,7 +122,7 @@ public class GameManager : Singleton<GameManager>
         }
 
         Monster monster = ObjectPool.GetObject(type).GetComponent<Monster>();
-        monster.Spawn();
+        monster.Spawn(monsterHealth);
 
         yield return new WaitForSeconds(2.5f);
     }
@@ -122,4 +146,49 @@ public class GameManager : Singleton<GameManager>
 
         selectedTower = null;
     }
+
+    public void OnCurrencyChanged()
+    {
+        if(Changed != null)
+        {
+            Changed();
+            Debug.Log("Currency changed.");
+        }
+    }
+
+    public void ShowStats()
+    {
+        statsPanel.SetActive(!statsPanel.activeSelf);
+    }
+
+    public void SetTooltipText(string text)
+    {
+        statText.text = text;
+    }
+
+    public void ShowInGameMenu()
+    {
+        optionsMenu.SetActive(false);
+        inGameMenu.SetActive(!inGameMenu.activeSelf);
+
+        Time.timeScale = !inGameMenu.activeSelf ? 1 : 0;
+    }
+
+    public void RestartGame()
+    {
+
+    }
+
+    public void ShowOptions()
+    {
+        inGameMenu.SetActive(false);
+
+        optionsMenu.SetActive(true);
+    }
+
+    public void QuitGame()
+    {
+
+    }
 }
+

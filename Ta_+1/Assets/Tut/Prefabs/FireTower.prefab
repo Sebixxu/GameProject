@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: f41c88984262a334da41b57b3cf35e5f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -190,9 +190,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5383838064926392058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890bd7d58ff8361498f6137add5731c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 15e2575975bb15746b294db114aa8f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 2
+  debuffDuration: 10
   projectileSpeed: 3
+  chanceForDebuff: 100
   projectileType: FireProjectile1
-  attackCooldown: 3
+  attackCooldown: 10
+  tickTime: 1
+  tickDamage: 2
