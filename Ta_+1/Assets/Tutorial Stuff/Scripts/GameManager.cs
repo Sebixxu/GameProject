@@ -108,7 +108,7 @@ public class GameManager : Singleton<GameManager>
         switch (monsterIndex)
         {
             case 0:
-                type = "BlueMonster";
+                type = "Hero";
                 break;
             case 1:
                 type = "RedMonster";
