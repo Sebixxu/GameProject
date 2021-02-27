@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Tut.Scripts.Towers;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Monster : MonoBehaviour
 {
