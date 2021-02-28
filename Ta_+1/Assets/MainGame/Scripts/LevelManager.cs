@@ -1,6 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
+
+//public enum TileType
+//{
+//    Spawn
+//}
+
+//public class SpecialTile
+//{
+//    public GameObject specialTilePrefab;
+//    public TileType tileType;
+//}
 
 public class LevelManager : Singleton<LevelManager>
 {
@@ -12,7 +25,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         get
         {
-            if(path == null)
+            if (path == null)
                 GeneratePath();
 
             return new Stack<Node>(new Stack<Node>(path));
@@ -23,6 +36,8 @@ public class LevelManager : Singleton<LevelManager>
 
     [SerializeField]
     private GameObject[] tilePrefabs;
+    [SerializeField]
+    private SpecialTile[] specialTiles;
     [SerializeField]
     private CameraMovement cameraMovement;
     [SerializeField]
@@ -80,7 +95,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SpawnPortals()
     {
-        _blueSpawnPoint = new Point(0,0);
+        _blueSpawnPoint = new Point(0, 0);
         GameObject bluePortal =
             Instantiate(bluePortalPrefab, Tiles[_blueSpawnPoint].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
         BluePortal = bluePortal.GetComponent<Portal>();
@@ -97,10 +112,10 @@ public class LevelManager : Singleton<LevelManager>
 
     private void PlaceTile(string tileType, int x, int y, Vector3 worldStartPosition)
     {
-        int tileIndex = int.Parse(tileType);
+        var tilePrefab = int.TryParse(tileType, out int tileIndex) ? tilePrefabs[tileIndex] : specialTiles.FirstOrDefault(tile => tile.tileChar == tileType.ToCharArray()[0])?.specialTilePrefab;
 
         var tilePosition = new Point(x, y);
-        var newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
+        var newTile = Instantiate(tilePrefab).GetComponent<TileScript>();
 
         newTile.Setup(tilePosition, new Vector3(worldStartPosition.x + TileSize * x, worldStartPosition.y - TileSize * y, 0), mapParentTransform);
     }

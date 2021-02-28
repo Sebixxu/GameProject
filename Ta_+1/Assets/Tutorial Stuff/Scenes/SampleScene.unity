@@ -573,6 +573,27 @@ MonoBehaviour:
   - {fileID: 4861456846758436272, guid: 8dc821655bfcd2547a526eaed03e0d21, type: 3}
   - {fileID: 1042153552824910576, guid: 064d8e37fdb6ed9439f3e08c409a8e0c, type: 3}
   - {fileID: 1494749191146111141, guid: 71efe945dba8a764da9cc89a8078a99e, type: 3}
+  specialTiles:
+  - tileChar: 77
+    description: Monster Spawn
+    specialTilePrefab: {fileID: 7933109918654747868, guid: 0a68b9263f0903d47ad2506e5233ed5b,
+      type: 3}
+    tileType: 1
+  - tileChar: 80
+    description: Player Spawn
+    specialTilePrefab: {fileID: 329388559257228278, guid: 678d9c22c8e0a7f4dbf8dda6ed68bb1b,
+      type: 3}
+    tileType: 0
+  - tileChar: 82
+    description: Rock
+    specialTilePrefab: {fileID: 8593251704578477149, guid: efb2d1100b60bf54cbc8ca7d030bf832,
+      type: 3}
+    tileType: 3
+  - tileChar: 67
+    description: Chest
+    specialTilePrefab: {fileID: 8365084532115641799, guid: 6f59724f4d759fc42b8604d0760fde7a,
+      type: 3}
+    tileType: 2
   cameraMovement: {fileID: 519420030}
   mapParentTransform: {fileID: 1234782238}
   bluePortalPrefab: {fileID: 8863876716372020670, guid: daab2ff1c1a523649a995201b1156a26,
