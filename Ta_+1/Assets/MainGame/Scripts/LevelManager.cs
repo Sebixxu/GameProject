@@ -3,18 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
-//public enum TileType
-//{
-//    Spawn
-//}
-
-//public class SpecialTile
-//{
-//    public GameObject specialTilePrefab;
-//    public TileType tileType;
-//}
-
 public class LevelManager : Singleton<LevelManager>
 {
     public Portal BluePortal { get; set; }
@@ -32,7 +20,6 @@ public class LevelManager : Singleton<LevelManager>
         }
         //set { path = value; }
     }
-
 
     [SerializeField]
     private GameObject[] tilePrefabs;
@@ -90,7 +77,7 @@ public class LevelManager : Singleton<LevelManager>
         var maxTile = Tiles[new Point(maxXMapSize - 1, maxYMapSize - 1)].transform.position;
         cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
 
-        SpawnPortals();
+        //SpawnPortals();
     }
 
     private void SpawnPortals()
@@ -110,14 +97,32 @@ public class LevelManager : Singleton<LevelManager>
         return position.X >= 0 && position.Y >= 0 && position.X < mapSize.X && position.Y < mapSize.Y;
     }
 
-    private void PlaceTile(string tileType, int x, int y, Vector3 worldStartPosition)
+    private void PlaceTile(string tileTypeName, int x, int y, Vector3 worldStartPosition)
     {
-        var tilePrefab = int.TryParse(tileType, out int tileIndex) ? tilePrefabs[tileIndex] : specialTiles.FirstOrDefault(tile => tile.tileChar == tileType.ToCharArray()[0])?.specialTilePrefab;
+        GameObject tilePrefab = null;
+        TileType tileType = TileType.Tile;
+
+        if (int.TryParse(tileTypeName, out int tileIndex))
+        {
+            tilePrefab = tilePrefabs[tileIndex];
+            tileType = TileType.Tile;
+        }
+        else
+        {
+            var specialTile = specialTiles.FirstOrDefault(tile => tile.tileChar == tileTypeName.ToCharArray()[0]);
+            if (specialTile != null)
+            {
+                tilePrefab = specialTile.specialTilePrefab;
+                tileType = specialTile.tileType;
+            }
+            else
+                Debug.LogError("Something went wrong in placing tiles. Tile with this char was not found in LevelManager.");
+        }
 
         var tilePosition = new Point(x, y);
         var newTile = Instantiate(tilePrefab).GetComponent<TileScript>();
 
-        newTile.Setup(tilePosition, new Vector3(worldStartPosition.x + TileSize * x, worldStartPosition.y - TileSize * y, 0), mapParentTransform);
+        newTile.Setup(tilePosition, new Vector3(worldStartPosition.x + TileSize * x, worldStartPosition.y - TileSize * y, 0), mapParentTransform, tileType);
     }
 
     private string[] ReadLevelTextFile()
