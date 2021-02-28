@@ -13,6 +13,7 @@ public class TileScript : MonoBehaviour
 
     private Tower myTower;
     //public SpriteRenderer SpriteRenderer => _spriteRenderer;
+    public TileType TileType { get; private set; }
     public Point GridPosition { get; private set; }
     public bool IsEmpty { get; private set; }
     public bool DebugOn { get; set; }
@@ -39,13 +40,14 @@ public class TileScript : MonoBehaviour
 
     }
 
-    public void Setup(Point gridPosition, Vector3 worldPosition, Transform parent)
+    public void Setup(Point gridPosition, Vector3 worldPosition, Transform parent, TileType tileType)
     {
         IsEmpty = true;
         Walkable = true;
 
         GridPosition = gridPosition;
         transform.position = worldPosition;
+        TileType = tileType;
         transform.SetParent(parent);
 
         LevelManager.Instance.Tiles.Add(gridPosition, this);

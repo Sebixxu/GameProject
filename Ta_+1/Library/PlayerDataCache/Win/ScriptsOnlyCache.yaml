@@ -12,7 +12,6 @@ ScriptsOnlyBuild:
     - Monster
     - Movement
     - ObjectPool
-    - Player
     - PlayerSpawner
     - Portal
     - Projectile
@@ -29,26 +28,13 @@ ScriptsOnlyBuild:
     Unity.2D.PixelPerfect.dll:
     - UnityEngine.U2D.PixelPerfectCamera
     Unity.2D.Tilemap.Editor.dll:
-    - UnityEditor.Tilemaps.GridBrush
-    - UnityEditor.Tilemaps.GridBrushEditor
-    - UnityEditor.Tilemaps.GridPaintPaletteClipboard
-    - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
     - UnityEditor.Tilemaps.GridPalettes
-    - UnityEditor.Tilemaps.PaintableSceneViewGrid
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
-    UnityEditor.Graphs.dll:
-    - UnityEditor.Graphs.AnimationBlendTree.Graph
-    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
-    - UnityEditor.Graphs.AnimationStateMachine.Graph
-    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
-    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -106,81 +92,81 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11248}
     - Class: 114
-      Script: {instanceID: 11594}
+      Script: {instanceID: 11582}
     - Class: 114
-      Script: {instanceID: 11618}
+      Script: {instanceID: 11606}
     - Class: 114
-      Script: {instanceID: 11660}
+      Script: {instanceID: 11648}
     - Class: 114
-      Script: {instanceID: 11764}
+      Script: {instanceID: 11754}
     - Class: 114
-      Script: {instanceID: 11848}
+      Script: {instanceID: 11838}
     - Class: 114
-      Script: {instanceID: 11870}
+      Script: {instanceID: 11860}
     - Class: 114
-      Script: {instanceID: 11940}
+      Script: {instanceID: 11930}
     - Class: 114
-      Script: {instanceID: 12054}
+      Script: {instanceID: 12044}
     - Class: 114
-      Script: {instanceID: 12178}
+      Script: {instanceID: 12168}
     - Class: 114
-      Script: {instanceID: 12194}
+      Script: {instanceID: 12184}
     - Class: 114
-      Script: {instanceID: 12248}
+      Script: {instanceID: 12238}
     - Class: 114
-      Script: {instanceID: 12380}
+      Script: {instanceID: 12370}
     - Class: 114
-      Script: {instanceID: 12416}
+      Script: {instanceID: 12406}
     - Class: 114
-      Script: {instanceID: 12434}
+      Script: {instanceID: 12424}
     - Class: 114
-      Script: {instanceID: 12902}
+      Script: {instanceID: 12892}
     - Class: 114
-      Script: {instanceID: 13004}
+      Script: {instanceID: 12994}
     - Class: 114
-      Script: {instanceID: 13178}
+      Script: {instanceID: 13168}
+    - Class: 114
+      Script: {instanceID: 13328}
     - Class: 114
       Script: {instanceID: 13338}
     - Class: 114
-      Script: {instanceID: 13348}
+      Script: {instanceID: 13350}
     - Class: 114
-      Script: {instanceID: 13360}
+      Script: {instanceID: 13358}
     - Class: 114
-      Script: {instanceID: 13368}
+      Script: {instanceID: 13438}
     - Class: 114
-      Script: {instanceID: 13448}
+      Script: {instanceID: 13560}
     - Class: 114
-      Script: {instanceID: 13570}
+      Script: {instanceID: 13662}
     - Class: 114
-      Script: {instanceID: 13672}
+      Script: {instanceID: 13678}
     - Class: 114
-      Script: {instanceID: 13688}
+      Script: {instanceID: 14042}
     - Class: 114
-      Script: {instanceID: 14052}
+      Script: {instanceID: 14050}
     - Class: 114
-      Script: {instanceID: 14060}
+      Script: {instanceID: 14084}
     - Class: 114
-      Script: {instanceID: 14094}
+      Script: {instanceID: 14120}
     - Class: 114
-      Script: {instanceID: 14130}
+      Script: {instanceID: 14138}
     - Class: 114
-      Script: {instanceID: 14148}
+      Script: {instanceID: 14198}
     - Class: 114
-      Script: {instanceID: 14208}
+      Script: {instanceID: 14552}
     - Class: 114
-      Script: {instanceID: 14562}
+      Script: {instanceID: 14596}
     - Class: 114
-      Script: {instanceID: 14606}
+      Script: {instanceID: 14600}
     - Class: 114
-      Script: {instanceID: 14610}
+      Script: {instanceID: 14634}
     - Class: 114
-      Script: {instanceID: 14644}
+      Script: {instanceID: 14656}
     - Class: 114
-      Script: {instanceID: 14666}
+      Script: {instanceID: 14712}
     - Class: 114
-      Script: {instanceID: 14722}
-    - Class: 114
-      Script: {instanceID: 14772}
+      Script: {instanceID: 14764}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -288,7 +274,7 @@ ScriptsOnlyBuild:
     className: Scrollbar
   - hash:
       serializedVersion: 2
-      Hash: 59a19f87191ce2dfb28f5d805d12e469
+      Hash: 706d04b1db19311af2b6084bca5425f6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelManager
@@ -702,7 +688,7 @@ ScriptsOnlyBuild:
     className: CinemachineTransposer
   - hash:
       serializedVersion: 2
-      Hash: 4cec0cb785c935c3c5cb877b40f2bbab
+      Hash: d1f07c9e64b7817e6271f80bb03de25f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerSpawner

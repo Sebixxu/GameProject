@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum TileType
 {
+    Tile,
     PlayerSpawn,
     MonsterSpawn,
     Chest,
