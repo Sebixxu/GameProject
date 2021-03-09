@@ -7,12 +7,12 @@ public class ChestTriggerCollider : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        IPlayer player = collider.GetComponent<IPlayer>();
+        //IPlayer player = collider.GetComponent<IPlayer>();
 
-        if (player != null)
-        {
-            Debug.Log("OPENING LECIMY");
-            //collider.enabled = false; zróbic to na poszczególnym a nie na grupie
-        }
+        //if (player != null)
+        //{
+        //    Debug.Log("OPENING LECIMY");
+        //    //collider.enabled = false; zróbic to na poszczególnym a nie na grupie
+        //}
     }
 }
