@@ -7,6 +7,7 @@ TagManager:
   - RedPortal
   - Monster
   - Tile
+  - Tower
   layers:
   - Default
   - TransparentFX
