@@ -8,6 +8,7 @@ public class LevelManager : Singleton<LevelManager>
 {
     public event CurrencyChanged Changed;
 
+    public int currentLevel;
     private int _currentCombatPoints;
 
     public int CurrentCombatPoints
@@ -64,8 +65,8 @@ public class LevelManager : Singleton<LevelManager>
 
     private Point mapSize;
     private Stack<Node> path; //W tej implementacji założenie jest takie że droga obliczana jest raz na początku
-    private Point _blueSpawnPoint;
-    private Point _redSpawnPoint;
+    private Point _startMonsterRoutePoint;
+    private Point _endMonsterRoutePoint;
 
     // Start is called before the first frame update
     void Start()
@@ -116,14 +117,14 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SpawnPortals()
     {
-        _blueSpawnPoint = new Point(0, 0);
+        _startMonsterRoutePoint = new Point(0, 0);
         GameObject bluePortal =
-            Instantiate(bluePortalPrefab, Tiles[_blueSpawnPoint].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+            Instantiate(bluePortalPrefab, Tiles[_startMonsterRoutePoint].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
         BluePortal = bluePortal.GetComponent<Portal>();
         BluePortal.name = "BluePortal";
 
-        _redSpawnPoint = new Point(11, 6);
-        Instantiate(redPortalPrefab, Tiles[_redSpawnPoint].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+        _endMonsterRoutePoint = new Point(11, 6);
+        Instantiate(redPortalPrefab, Tiles[_endMonsterRoutePoint].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
     }
 
     public bool InBounds(Point position)
@@ -170,7 +171,12 @@ public class LevelManager : Singleton<LevelManager>
 
     public void GeneratePath()
     {
-        path = AStar.GetPath(_blueSpawnPoint, _redSpawnPoint);
+        path = AStar.GetPath(_startMonsterRoutePoint, _endMonsterRoutePoint);
+    }
+
+    public Stack<Node> GeneratePath(Point startingPoint, Point goalPoint)
+    {
+        return AStar.GetPath(startingPoint, goalPoint);
     }
 
     public void OnCurrencyChanged()

@@ -20,6 +20,9 @@ public class Monster : MonoBehaviour
     [SerializeField]
     private Stat health;
 
+    [SerializeField]
+    private float maxHealthValue;
+
     private SpriteRenderer _spriteRenderer;
     private Stack<Node> path;
     private Vector3 destination;
@@ -41,18 +44,18 @@ public class Monster : MonoBehaviour
         Move();
     }
 
-    public void Spawn(float monsterHealth)
+    public void Spawn(Vector2 spawnPosition)
     {
         _debuffs.Clear();
 
         health.Bar.Reset();
 
-        health.CurrentValue = health.MaxVal = monsterHealth;
-        transform.position = LevelManager.Instance.BluePortal.transform.position;
+        health.CurrentValue = health.MaxVal = maxHealthValue;
+        transform.position = spawnPosition;
 
         IsActive = true;
 
-        SetPath(LevelManager.Instance.Path);
+        //SetPath(LevelManager.Instance.Path);
     }
 
     private void Move()
@@ -68,6 +71,14 @@ public class Monster : MonoBehaviour
                 destination = path.Pop().WorldPosition;
             }
         }
+    }
+
+    public void GenerateAndSetPath(TileScript startingTileScript, TileScript goalTileScript)
+    {
+        path = LevelManager.Instance.GeneratePath(startingTileScript.GridPosition, goalTileScript.GridPosition);
+
+        GridPosition = path.Peek().GridPosition;
+        destination = path.Pop().WorldPosition;
     }
 
     private void SetPath(Stack<Node> newPath)
