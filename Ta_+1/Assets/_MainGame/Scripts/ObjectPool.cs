@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ObjectPool : MonoBehaviour
+public class ObjectPool : Singleton<ObjectPool>
 {
     [SerializeField]
     private GameObject[] objectPrefabs;

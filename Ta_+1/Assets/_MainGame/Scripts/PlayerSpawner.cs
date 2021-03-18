@@ -31,6 +31,7 @@ public class PlayerSpawner : MonoBehaviour
 
     private void SpawnPlayer()
     {
+        //TODO Bez sensu to troche jest napisane, przepisać.
         if (spawnXCord == null || spawnYCord == null)
         {
             var tile = _levelManager.Tiles.FirstOrDefault(x => x.Value.TileType == TileType.PlayerSpawn);
