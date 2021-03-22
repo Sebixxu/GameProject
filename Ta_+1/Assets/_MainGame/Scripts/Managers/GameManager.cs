@@ -191,6 +191,8 @@ public class GameManager : Singleton<GameManager>
         }
         else
             PauseGame();
+
+        pauseButton.RevertPauseBlockImageState();
     }
 
     public void PauseGame()
