@@ -96,17 +96,28 @@ public class Monster : MonoBehaviour
     {
         _debuffs.Clear();
 
-        GameManager.Instance.ObjectPool.ReleaseObject(gameObject);
+        //GameManager.Instance.ObjectPool.ReleaseObject(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("RedPortal"))
+        //if (other.CompareTag("RedPortal"))
+        //{
+        //    Debug.Log("Collided");
+
+        //    gameObject.SetActive(false);
+        //    IsActive = false;
+        //}
+
+        if (other.CompareTag("PlayerSpawn"))
         {
-            Debug.Log("Collided");
+            Debug.Log("Collided with PlayerSpawn");
 
             gameObject.SetActive(false);
             IsActive = false;
+
+            ObjectPool.Instance.ReleaseObject(gameObject);
+            LevelInfoPanel.Instance.IncreasePassedValue();
         }
 
         if (other.CompareTag("Tile"))
@@ -130,7 +141,7 @@ public class Monster : MonoBehaviour
 
                 IsActive = false;
                 //GetComponent<SpriteRenderer>().sortingOrder--;
-                GameManager.Instance.ObjectPool.ReleaseObject(gameObject);
+                //GameManager.Instance.ObjectPool.ReleaseObject(gameObject);
                 
                 Debug.Log("Dead body");
             }

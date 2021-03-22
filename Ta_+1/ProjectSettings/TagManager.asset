@@ -8,6 +8,7 @@ TagManager:
   - Monster
   - Tile
   - Tower
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX

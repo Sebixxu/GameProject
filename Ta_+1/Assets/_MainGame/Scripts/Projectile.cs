@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour
         }
         else if (!_target.IsActive)
         {
-            GameManager.Instance.ObjectPool.ReleaseObject(gameObject);
+            //GameManager.Instance.ObjectPool.ReleaseObject(gameObject);
         }
     }
 
@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour
                 _target.TakeDamage(_parent.Damage, _towerType);
                 ApplyDebuff();
 
-                GameManager.Instance.ObjectPool.ReleaseObject(gameObject);
+                //GameManager.Instance.ObjectPool.ReleaseObject(gameObject);
             }
         }
     }
