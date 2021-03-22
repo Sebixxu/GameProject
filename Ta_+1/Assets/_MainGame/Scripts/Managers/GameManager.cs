@@ -17,6 +17,9 @@ public class GameManager : Singleton<GameManager>
     //public ObjectPool ObjectPool { get; set; }
 
     [SerializeField]
+    private PauseButton pauseButton;
+
+    [SerializeField]
     private Text currencyText;
 
     [SerializeField]
@@ -27,11 +30,11 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField]
     private GameObject inGameMenu;
-    
+
     [SerializeField]
     private GameObject optionsMenu;
 
-    [SerializeField] 
+    [SerializeField]
     private GameObject statsPanel;
 
     private int currency;
@@ -181,7 +184,23 @@ public class GameManager : Singleton<GameManager>
         optionsMenu.SetActive(false);
         inGameMenu.SetActive(!inGameMenu.activeSelf);
 
-        Time.timeScale = !inGameMenu.activeSelf ? 1 : 0;
+        if (!inGameMenu.activeSelf)
+        {
+            pauseButton.GetComponent<ChangeableImageButton>().SetDefaultSprite(); //Reset PauseButton state
+            ResumeGame();
+        }
+        else
+            PauseGame();
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
     }
 
     public void RestartGame()
