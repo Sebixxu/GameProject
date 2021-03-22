@@ -33,31 +33,31 @@ public class ChangeableImageButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SwitchButtonSprites()
     {
-        if(_button.transition != Selectable.Transition.SpriteSwap)
-            return;
-
         var buttonSpriteState = _button.spriteState;
 
         if (_isDefaultState)
         {
             _image.sprite = secondarySprite;
-            buttonSpriteState.pressedSprite = secondaryPressedSprite;
+
+            if (_button.transition == Selectable.Transition.SpriteSwap && secondaryPressedSprite != null)
+                buttonSpriteState.pressedSprite = secondaryPressedSprite;
         }
 
         if (!_isDefaultState)
         {
             _image.sprite = mainSprite;
-            buttonSpriteState.pressedSprite = mainPressedSprite;
+
+            if (_button.transition == Selectable.Transition.SpriteSwap && secondaryPressedSprite != null)
+                buttonSpriteState.pressedSprite = mainPressedSprite;
         }
 
         _button.spriteState = buttonSpriteState;
         _isDefaultState = !_isDefaultState;
-
     }
 
     public void SetDefaultSprite()
