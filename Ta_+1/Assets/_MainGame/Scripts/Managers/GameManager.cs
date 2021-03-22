@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
 
     //public TowerButton ClickedTowerButton { get; set; }
     public TowerBenchSlot ClickedTowerBenchSlot { get; set; }
-    public ObjectPool ObjectPool { get; set; }
+    //public ObjectPool ObjectPool { get; set; }
 
     [SerializeField]
     private Text currencyText;
@@ -51,7 +51,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Awake()
     {
-        ObjectPool = GetComponent<ObjectPool>();
+        //ObjectPool = GetComponent<ObjectPool>();
     }
 
     // Start is called before the first frame update
@@ -131,7 +131,7 @@ public class GameManager : Singleton<GameManager>
                 break;
         }
 
-        Monster monster = ObjectPool.GetObject(type).GetComponent<Monster>();
+        //Monster monster = ObjectPool.GetObject(type).GetComponent<Monster>();
         //monster.Spawn(monsterHealth);
 
         yield return new WaitForSeconds(2.5f);

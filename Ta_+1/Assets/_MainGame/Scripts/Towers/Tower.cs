@@ -120,10 +120,10 @@ public abstract class Tower : MonoBehaviour
 
     private void Shoot()
     {
-        Projectile projectile = GameManager.Instance.ObjectPool.GetObject(projectileType).GetComponent<Projectile>();
+        //Projectile projectile = GameManager.Instance.ObjectPool.GetObject(projectileType).GetComponent<Projectile>();
 
-        projectile.transform.position = transform.position;
-        projectile.Initialize(this);
+        //projectile.transform.position = transform.position;
+        //projectile.Initialize(this);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

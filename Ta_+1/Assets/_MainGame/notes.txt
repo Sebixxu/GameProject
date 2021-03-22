@@ -1,6 +1,13 @@
 x: 18
 y: 10
 
+Gamescaling:
+Zmiana Pixel Perfect Camera:
+
+Reference Resoultion: 1280 x 720
+Assets Pixels Per Unit: 43
++ Zmiana Canvas
+
 ---Font---
 
 :::ABOUT BITMGOTHIC:::

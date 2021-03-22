@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -27,6 +28,8 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
     private readonly List<MonsterWaveModel> _monsterWaves;
     private List<MonsterProbabilityOnLevelModel> _monsterProbabilityOnLevel;
     private bool _spawningProcessStarted;
+    private MonsterProbabilityOnLevelModel _monsterProbabilityOnLevelModel;
+    private int _monsterCount;
 
     public MonsterSpawner(List<MonsterWaveModel> monsterWaves)
     {
@@ -37,6 +40,16 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
     void Start()
     {
         _monsterProbabilityOnLevel = MonsterProbabilityPool.Instance.MonsterProbabilityOnLevel;
+        _monsterProbabilityOnLevelModel = _monsterProbabilityOnLevel.FirstOrDefault(x => x.level == LevelManager.Instance.currentLevel);
+
+        if (_monsterProbabilityOnLevelModel == null)
+        {
+            Debug.LogError($"[MonsterSpawner] There is no Monster Probability defined for this level: {LevelManager.Instance.currentLevel}.", this);
+            throw new Exception($"[MonsterSpawner] There is no Monster Probability defined for this level: {LevelManager.Instance.currentLevel}.");
+        }
+
+        _monsterCount = Random.Range(_monsterProbabilityOnLevelModel.minMonsterCount, _monsterProbabilityOnLevelModel.maxMonsterCount);
+        SetLevelInfoPanel(_monsterCount);
     }
 
     // Update is called once per frame
@@ -57,27 +70,15 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
         var monsterSpawnTiles = LevelManager.Instance.Tiles.Values.Where(x => x.TileType == TileType.MonsterSpawn).ToList();
         var goalTile = LevelManager.Instance.Tiles.Values.First(x => x.TileType == TileType.PlayerSpawn);
 
-        var monsterProbabilityOnLevel = _monsterProbabilityOnLevel.FirstOrDefault(x => x.level == LevelManager.Instance.currentLevel);
-
-        if (monsterProbabilityOnLevel == null)
-        {
-            Debug.LogError($"[MonsterSpawner] There is no Monster Probability defined for this level: {LevelManager.Instance.currentLevel}.", this);
-            yield break;
-        }
-
-        var monsterCount = Random.Range(monsterProbabilityOnLevel.minMonsterCount,
-            monsterProbabilityOnLevel.maxMonsterCount);
-
-        Debug.Log($"[MonsterSpawner] Monster count set to: {monsterCount}");
-        for (int i = 0; i < monsterCount; i++)
+        Debug.Log($"[MonsterSpawner] Monster count set to: {_monsterCount}");
+        for (int i = 0; i < _monsterCount; i++)
         {
             var getMonsterSpawnTileIndex = Random.Range(0, monsterSpawnTiles.Count);
             var monsterSpawnTile = monsterSpawnTiles[getMonsterSpawnTileIndex];
 
-            var currentProbabilityMonsters = monsterProbabilityOnLevel.monsterProbabilityModels;
+            var currentProbabilityMonsters = _monsterProbabilityOnLevelModel.monsterProbabilityModels;
 
-            float randomValue = Random.Range(0.0f, 0.99f);
-            var monster = currentProbabilityMonsters.FirstOrDefault(x => randomValue >= x.minProbabilityRange && randomValue < x.maxProbabilityRange)?.monster;
+            var randomValue = GetRandomMonster(currentProbabilityMonsters, out var monster);
 
             if (monster == null)
             {
@@ -85,15 +86,40 @@ public class MonsterSpawner : Singleton<MonsterSpawner>
                 yield break;
             }
 
-            var monsterFromObjectPool = ObjectPool.Instance.GetObject(monster.name).GetComponent<Monster>();
-            Debug.Log($"[MonsterSpawner] Spawning monster: {monsterFromObjectPool.name} on " +
-                      $"({monsterSpawnTile.GridPosition.X}, {monsterSpawnTile.GridPosition.Y}) grid position tile.");
-            monsterFromObjectPool.Spawn(monsterSpawnTile.WorldPosition);
-            monsterFromObjectPool.GenerateAndSetPath(monsterSpawnTile, goalTile);
+            SpawnMonster(monster, monsterSpawnTile, goalTile);
 
             var secondBetweenMonsters = Random.Range(minSecondBetweenMonsters, maxSecondBetweenMonsters);
             Debug.Log($"[MonsterSpawner] Second between monster set to: {secondBetweenMonsters}");
             yield return new WaitForSeconds(secondBetweenMonsters);
         }
+    }
+
+    private static float GetRandomMonster(List<MonsterProbabilityModel> currentProbabilityMonsters, out Monster monster)
+    {
+        float randomValue = Random.Range(0.0f, 0.99f);
+        monster = currentProbabilityMonsters
+            .FirstOrDefault(x => randomValue >= x.minProbabilityRange && randomValue < x.maxProbabilityRange)?.monster;
+        return randomValue;
+    }
+
+    private void SpawnMonster(Monster monster, TileScript monsterSpawnTile, TileScript goalTile)
+    {
+        var monsterFromObjectPool = ObjectPool.Instance.GetObject(monster.name).GetComponent<Monster>();
+        Debug.Log($"[MonsterSpawner] Spawning monster: {monsterFromObjectPool.name} on " +
+                  $"({monsterSpawnTile.GridPosition.X}, {monsterSpawnTile.GridPosition.Y}) grid position tile.");
+        monsterFromObjectPool.Spawn(monsterSpawnTile.WorldPosition);
+        monsterFromObjectPool.GenerateAndSetPath(monsterSpawnTile, goalTile);
+
+        UpdateIncomingValueInInfoPanel();
+    }
+
+    private void UpdateIncomingValueInInfoPanel()
+    {
+        LevelInfoPanel.Instance.DecreaseIncomingValue();
+    }
+
+    private void SetLevelInfoPanel(int monsterCount)
+    {
+        LevelInfoPanel.Instance.SetIncomingValue(monsterCount);
     }
 }
