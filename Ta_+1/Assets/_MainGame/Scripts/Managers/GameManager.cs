@@ -187,12 +187,14 @@ public class GameManager : Singleton<GameManager>
         if (!inGameMenu.activeSelf)
         {
             pauseButton.GetComponent<ChangeableImageButton>().SetDefaultSprite(); //Reset PauseButton state
+            pauseButton.SetActivePauseBlockImageState(false);
             ResumeGame();
         }
         else
+        {
+            pauseButton.SetActivePauseBlockImageState(true);
             PauseGame();
-
-        pauseButton.RevertPauseBlockImageState();
+        }
     }
 
     public void PauseGame()
@@ -217,7 +219,7 @@ public class GameManager : Singleton<GameManager>
         optionsMenu.SetActive(true);
     }
 
-    public void QuitGame()
+    public void BackToMenu()
     {
 
     }
