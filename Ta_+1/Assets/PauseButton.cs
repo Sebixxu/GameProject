@@ -47,8 +47,8 @@ public class PauseButton : MonoBehaviour
         GameManager.Instance.ResumeGame();
     }
 
-    public void RevertPauseBlockImageState()
+    public void SetActivePauseBlockImageState(bool isActive)
     {
-        pauseBlockImage.SetActive(!pauseBlockImage.activeSelf);
+        pauseBlockImage.SetActive(isActive);
     }
 }
