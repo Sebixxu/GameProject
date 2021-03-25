@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [SerializeField]
-    private LevelLoader levelLoader;
     // Start is called before the first frame update
     void Awake()
     {
@@ -20,7 +18,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void NewGameClick()
     {
-        levelLoader.LoadLevel("Level0");
+        LevelLoader.Instance.LoadLevel("PreparingMenu");
     }
 
     public void ContinueClick()

@@ -467,55 +467,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &213932745
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 213932747}
-  - component: {fileID: 213932746}
-  m_Layer: 0
-  m_Name: BenchTowerPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &213932746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 213932745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27a78dcfa3adae446a0337fb56b98d17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _chosenTowers:
-  - {fileID: 4560203955332019688, guid: eee29f2cbfee53f4f833c45657878230, type: 3}
-  - {fileID: 4560203955332019688, guid: 8bede78040a36144b988f3fbb90e9843, type: 3}
-  - {fileID: 4560203955332019688, guid: ed686387a148a3d4f810418ceade59e5, type: 3}
-  - {fileID: 4560203955332019688, guid: 3be26b8525da60e43bd2806424d2e12a, type: 3}
-  - {fileID: 4560203955332019688, guid: c424c82b85c6f1a4784363624175fff7, type: 3}
---- !u!4 &213932747
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 213932745}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1774294835}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &233395984
 GameObject:
   m_ObjectHideFlags: 0
@@ -4535,62 +4486,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506555808}
   m_CullTransparentMesh: 0
---- !u!1 &1514130763
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1514130765}
-  - component: {fileID: 1514130764}
-  m_Layer: 0
-  m_Name: BenchCostPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1514130764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514130763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a25a19e529e7eb43bbc1859440678ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerCostModels:
-  - cost: 1
-    image: {fileID: 21300000, guid: 972e30185dfc84a47b47e2cdde712ea8, type: 3}
-  - cost: 2
-    image: {fileID: 21300000, guid: 10d1b004a7d11fd4fa29dd6634ad5cca, type: 3}
-  - cost: 3
-    image: {fileID: 21300000, guid: 65ab5bd2c81ba144888fcf0b787cfe99, type: 3}
-  - cost: 4
-    image: {fileID: 21300000, guid: 79efbc181d1454044aa8dfa1770bea54, type: 3}
-  - cost: 5
-    image: {fileID: 21300000, guid: 5aa92427f63b3184580dc96dea1a6f56, type: 3}
-  - cost: 6
-    image: {fileID: 21300000, guid: 25d1a7945c42a2e42a380765b41ffb10, type: 3}
---- !u!4 &1514130765
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514130763}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1774294835}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1514709378
 GameObject:
   m_ObjectHideFlags: 0
@@ -5613,38 +5508,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742116676}
   m_CullTransparentMesh: 0
---- !u!1 &1774294834
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1774294835}
-  m_Layer: 0
-  m_Name: BenchGameObjects
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1774294835
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1774294834}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 213932747}
-  - {fileID: 1514130765}
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1785345476
 GameObject:
   m_ObjectHideFlags: 0
@@ -6869,6 +6732,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2135086219}
   m_CullTransparentMesh: 0
+--- !u!1001 &1715847944175701643
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1715847943768824248, guid: ed9827432d99f5f49b70b45f0b0ae0ed,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715847943768824248, guid: ed9827432d99f5f49b70b45f0b0ae0ed,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715847943768824248, guid: ed9827432d99f5f49b70b45f0b0ae0ed,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715847943768824248, guid: ed9827432d99f5f49b70b45f0b0ae0ed,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715847943768824248, guid: ed9827432d99f5f49b70b45f0b0ae0ed,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715847943768824248, guid: ed9827432d99f5f49b70b45f0b0ae0ed,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715847943768824248, guid: ed9827432d99f5f49b70b45f0b0ae0ed,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715847943768824248, guid: ed9827432d99f5f49b70b45f0b0ae0ed,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715847943768824248, guid: ed9827432d99f5f49b70b45f0b0ae0ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715847943768824248, guid: ed9827432d99f5f49b70b45f0b0ae0ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715847943768824248, guid: ed9827432d99f5f49b70b45f0b0ae0ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715847943768824249, guid: ed9827432d99f5f49b70b45f0b0ae0ed,
+        type: 3}
+      propertyPath: m_Name
+      value: BenchGameObjects
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ed9827432d99f5f49b70b45f0b0ae0ed, type: 3}
 --- !u!1001 &4426315161485224745
 PrefabInstance:
   m_ObjectHideFlags: 0

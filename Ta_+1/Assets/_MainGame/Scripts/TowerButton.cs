@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TowerButton : MonoBehaviour
+public class TowerButton : MonoBehaviour //Obsolete - old tut
 {
     [SerializeField]
     private GameObject towerPrefab;
