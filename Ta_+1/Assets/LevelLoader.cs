@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelLoader : MonoBehaviour
+public class LevelLoader : Singleton<LevelLoader>
 {
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private Slider slider;
@@ -28,9 +28,5 @@ public class LevelLoader : MonoBehaviour
             Debug.Log($"[LevelLoader] Loading scene: {sceneName}, progress: {progress}.");
             yield return null;
         }
-    }
-
-    private void PerformLoadLevel()
-    {
     }
 }

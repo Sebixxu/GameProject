@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1715847943536411584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1715847943536411590}
+  - component: {fileID: 1715847943536411591}
+  m_Layer: 0
+  m_Name: BenchCostPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1715847943536411590
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715847943536411584}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1715847943768824248}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1715847943536411591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715847943536411584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a25a19e529e7eb43bbc1859440678ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerCostModels:
+  - cost: 1
+    image: {fileID: 21300000, guid: 972e30185dfc84a47b47e2cdde712ea8, type: 3}
+  - cost: 2
+    image: {fileID: 21300000, guid: 10d1b004a7d11fd4fa29dd6634ad5cca, type: 3}
+  - cost: 3
+    image: {fileID: 21300000, guid: 65ab5bd2c81ba144888fcf0b787cfe99, type: 3}
+  - cost: 4
+    image: {fileID: 21300000, guid: 79efbc181d1454044aa8dfa1770bea54, type: 3}
+  - cost: 5
+    image: {fileID: 21300000, guid: 5aa92427f63b3184580dc96dea1a6f56, type: 3}
+  - cost: 6
+    image: {fileID: 21300000, guid: 25d1a7945c42a2e42a380765b41ffb10, type: 3}
+--- !u!1 &1715847943768824249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1715847943768824248}
+  m_Layer: 0
+  m_Name: BenchGameObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1715847943768824248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715847943768824249}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1715847944389596224}
+  - {fileID: 1715847943536411590}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1715847944389596226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1715847944389596224}
+  - component: {fileID: 1715847944389596225}
+  m_Layer: 0
+  m_Name: BenchTowerPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1715847944389596224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715847944389596226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1715847943768824248}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1715847944389596225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715847944389596226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a78dcfa3adae446a0337fb56b98d17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chosenTowers:
+  - {fileID: 4560203955332019688, guid: eee29f2cbfee53f4f833c45657878230, type: 3}
+  - {fileID: 4560203955332019688, guid: 8bede78040a36144b988f3fbb90e9843, type: 3}
+  - {fileID: 4560203955332019688, guid: ed686387a148a3d4f810418ceade59e5, type: 3}
+  - {fileID: 4560203955332019688, guid: 3be26b8525da60e43bd2806424d2e12a, type: 3}
+  - {fileID: 4560203955332019688, guid: c424c82b85c6f1a4784363624175fff7, type: 3}
