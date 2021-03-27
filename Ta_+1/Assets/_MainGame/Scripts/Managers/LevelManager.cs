@@ -90,10 +90,11 @@ public class LevelManager : Singleton<LevelManager>
     {
         Tiles = new Dictionary<Point, TileScript>();
 
-        string[] mapData = ReadLevelTextFile();
+        string[] levelZeroMapData = ReadLevelZeroTextFile();
+        string[] levelOneMapData = ReadLevelOneTextFile();
 
-        int maxXMapSize = mapData[0].Replace("|", String.Empty).Replace(" ", String.Empty).ToCharArray().Length;
-        int maxYMapSize = mapData.Length;
+        int maxXMapSize = levelZeroMapData[0].Replace("|", String.Empty).Replace(" ", String.Empty).ToCharArray().Length;
+        int maxYMapSize = levelZeroMapData.Length;
 
         mapSize = new Point(maxXMapSize, maxYMapSize);
 
@@ -101,11 +102,22 @@ public class LevelManager : Singleton<LevelManager>
 
         for (int y = 0; y < maxYMapSize; y++)
         {
-            var newTiles = mapData[y].Replace(" ", String.Empty).Split('|');
+            var newTiles = levelZeroMapData[y].Replace(" ", String.Empty).Split('|');
+            var objectForTiles = levelOneMapData[y].Replace(" ", String.Empty).Split('|');
 
             for (int x = 0; x < maxXMapSize; x++)
             {
-                PlaceTile(newTiles[x], x, y, worldStartPosition);
+                var placedTile = PlaceTile(newTiles[x], x, y, worldStartPosition);
+
+                //TODO Refactor
+                if (objectForTiles[x].Replace(" ", "") != "0")
+                {
+                    var currentColumn = GetColumn(levelOneMapData, x);
+                    var placedGameObject = PlaceObject(objectForTiles[x], x, y, worldStartPosition, placedTile, currentColumn);
+
+                    if(placedGameObject != null)
+                        placedTile.AttachObjectToTile(placedGameObject);
+                }
             }
         }
 
@@ -113,6 +125,19 @@ public class LevelManager : Singleton<LevelManager>
         cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
 
         //SpawnPortals();
+    }
+
+    private List<string> GetColumn(string[] levelOneMapData, int columnIndex)
+    {
+        var column = new List<string>();
+
+        foreach (var s in levelOneMapData)
+        {
+            var test = s.Split('|');
+            column.Add(test[columnIndex]);
+        }
+
+        return column;
     }
 
     private void SpawnPortals()
@@ -132,7 +157,83 @@ public class LevelManager : Singleton<LevelManager>
         return position.X >= 0 && position.Y >= 0 && position.X < mapSize.X && position.Y < mapSize.Y;
     }
 
-    private void PlaceTile(string tileTypeName, int x, int y, Vector3 worldStartPosition)
+    private GameObject PlaceObject(string tileTypeName, int x, int y, Vector3 worldStartPosition, TileScript parentTileScript, List<string> levelOneColumnStrings)
+    {
+        var tileChar = tileTypeName[0];
+        var tileNumber = tileTypeName.Substring(1, 2);
+        var currentSpriteIndex = int.Parse(tileTypeName[tileTypeName.Length - 1].ToString());
+
+        ITileObject tileObject = null;
+
+        if (tileChar == 'R')
+        {
+            tileObject = MapObjectPool.Instance.RockObjects.FirstOrDefault(o => o.TileNumber == tileNumber);
+        }
+        else if (tileChar == 'W')
+        {
+            tileObject = MapObjectPool.Instance.WaterObjects.FirstOrDefault(o => o.TileNumber == tileNumber);
+        }
+        else if (tileChar == 'C')
+        {
+            tileObject = MapObjectPool.Instance.ChestObjects.FirstOrDefault(o => o.TileNumber == tileNumber);
+        }
+        else if (tileChar == 'H')
+        {
+            tileObject = MapObjectPool.Instance.HoleObjects.FirstOrDefault(o => o.TileNumber == tileNumber);
+        }
+
+        if (tileObject != null)
+        {
+            var currentPrefab = tileObject.Prefabs[currentSpriteIndex];
+
+            var transformWorldPosition = new Vector3(worldStartPosition.x + TileSize * x, worldStartPosition.y - TileSize * y, 0);
+            var createdTileObject = Instantiate(currentPrefab);
+            createdTileObject.transform.position = transformWorldPosition;
+
+            int sortingOrder = 0;
+            if (tileChar == 'R')
+            {
+                sortingOrder = GetOrderInLayerForRockObject(levelOneColumnStrings, tileChar + tileNumber);
+                parentTileScript.Setup(tileObject, false, false);
+            }
+            else if (tileChar == 'W')
+            {
+                sortingOrder = GetOrderInLayerForWaterObject(levelOneColumnStrings, tileTypeName);
+                parentTileScript.Setup(tileObject, false, true);
+            }
+            else if (tileChar == 'C')
+            {
+                sortingOrder = ++parentTileScript.GetComponent<SpriteRenderer>().sortingOrder;
+                parentTileScript.Setup(tileObject, false, true);
+            }
+            else if (tileChar == 'H')
+            {
+                sortingOrder = ++parentTileScript.GetComponent<SpriteRenderer>().sortingOrder;
+                parentTileScript.Setup(tileObject, false, false);
+            }
+
+            createdTileObject.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder;
+            return createdTileObject;
+        }
+
+        return null; // TODO ?
+    }
+
+    private int GetOrderInLayerForRockObject(List<string> levelOneColumnStrings, string currentObjectName)
+    {
+        var lastIndex = levelOneColumnStrings.ToList().FindLastIndex(x => x.Contains(currentObjectName));
+
+        return ++lastIndex;
+    }
+
+    private int GetOrderInLayerForWaterObject(List<string> levelOneColumnStrings, string currentObjectName)
+    {
+        var lastIndex = levelOneColumnStrings.ToList().FindIndex(x => x.Contains(currentObjectName));
+        lastIndex += 2;
+        return lastIndex;
+    }
+
+    private TileScript PlaceTile(string tileTypeName, int x, int y, Vector3 worldStartPosition)
     {
         GameObject tilePrefab = null;
         TileType tileType = TileType.Tile;
@@ -157,12 +258,24 @@ public class LevelManager : Singleton<LevelManager>
         var tilePosition = new Point(x, y);
         var newTile = Instantiate(tilePrefab).GetComponent<TileScript>();
 
-        newTile.Setup(tilePosition, new Vector3(worldStartPosition.x + TileSize * x, worldStartPosition.y - TileSize * y, 0), mapParentTransform, tileType);
+        var transformWorldPosition = new Vector3(worldStartPosition.x + TileSize * x, worldStartPosition.y - TileSize * y, 0);
+        newTile.Setup(tilePosition, transformWorldPosition, mapParentTransform, tileType);
+
+        return newTile;
     }
 
-    private string[] ReadLevelTextFile()
+    private string[] ReadLevelZeroTextFile()
     {
-        TextAsset bindData = Resources.Load("Level") as TextAsset;
+        TextAsset bindData = Resources.Load("Level0-0") as TextAsset;
+
+        string data = bindData.text.Replace(Environment.NewLine, String.Empty);
+
+        return data.Split('-');
+    }
+
+    private string[] ReadLevelOneTextFile()
+    {
+        TextAsset bindData = Resources.Load("Level0-1") as TextAsset;
 
         string data = bindData.text.Replace(Environment.NewLine, String.Empty);
 

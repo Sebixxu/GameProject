@@ -13,6 +13,7 @@ public class TileScript : MonoBehaviour
 
     private Tower myTower;
     //public SpriteRenderer SpriteRenderer => _spriteRenderer;
+    public ITileObject ChildTileObject { get; private set; }
     public TileType TileType { get; private set; }
     public Point GridPosition { get; private set; }
     public bool IsEmpty { get; private set; }
@@ -38,6 +39,14 @@ public class TileScript : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void Setup(ITileObject tileObject, bool isEmpty, bool isWalkable)
+    {
+        IsEmpty = isEmpty;
+        Walkable = isWalkable;
+
+        ChildTileObject = tileObject;
     }
 
     public void Setup(Point gridPosition, Vector3 worldPosition, Transform parent, TileType tileType)
@@ -98,6 +107,11 @@ public class TileScript : MonoBehaviour
     {
         if(!DebugOn)
             ColorTile(defaultColor);
+    }
+
+    public void AttachObjectToTile(GameObject tileObject)
+    {
+        tileObject.transform.SetParent(transform);
     }
 
     private void PlaceTower()

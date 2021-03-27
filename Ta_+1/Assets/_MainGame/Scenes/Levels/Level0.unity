@@ -794,16 +794,6 @@ MonoBehaviour:
   - {fileID: 1042153552824910576, guid: 064d8e37fdb6ed9439f3e08c409a8e0c, type: 3}
   - {fileID: 1494749191146111141, guid: 71efe945dba8a764da9cc89a8078a99e, type: 3}
   specialTilesModel:
-  - tileChar: 82
-    description: Rock
-    specialTilePrefab: {fileID: 8593251704578477149, guid: efb2d1100b60bf54cbc8ca7d030bf832,
-      type: 3}
-    tileType: 4
-  - tileChar: 67
-    description: Chest
-    specialTilePrefab: {fileID: 8365084532115641799, guid: 6f59724f4d759fc42b8604d0760fde7a,
-      type: 3}
-    tileType: 3
   - tileChar: 80
     description: Player Spawn
     specialTilePrefab: {fileID: 329388559257228278, guid: 678d9c22c8e0a7f4dbf8dda6ed68bb1b,
@@ -3000,6 +2990,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 991397099}
   m_CullTransparentMesh: 0
+--- !u!1 &995558804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 995558806}
+  - component: {fileID: 995558805}
+  m_Layer: 0
+  m_Name: MapObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &995558805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995558804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd124495f160b94280dad75a73e8ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rockObjects:
+  - {fileID: 2300999004921293574, guid: 0d9b1aebd614a9c49a8ce8334db4372e, type: 3}
+  - {fileID: 8821204603248097475, guid: b0b6ccd076a95f1478eac803077e055b, type: 3}
+  waterObjects:
+  - {fileID: 1234016084346513313, guid: 6ef5df99ebbd178428a86db03221f359, type: 3}
+  chestObjects:
+  - {fileID: 4886380383047740113, guid: ddecf40c803ea284dacfa0ff1754aec9, type: 3}
+  holeObjects:
+  - {fileID: 3223145769980503430, guid: 090cc296f977b6e4f9e086d6f0728ed0, type: 3}
+--- !u!4 &995558806
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995558804}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1088645846
 GameObject:
   m_ObjectHideFlags: 0
@@ -3856,7 +3898,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341833747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.5, y: 0.9375, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
