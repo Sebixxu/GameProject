@@ -1,16 +1,39 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Character
 {
-    #region Singleton
+    public ExtendedStatistics Statistics => statistics;
+    public float MovementInWater => _movementInWater;
+
+    public Movement Movement
+    {
+        get { return _movement; }
+        set { _movement = value; }
+    }
 
     public static Player Instance;
+    public float PlayerRange
+    {
+        get { return playerRange; }
+        set { playerRange = value; }
+    }
 
+    [SerializeField]
+    private float playerRange; //Defines transform.scale in each direction 
+
+    private SpriteRenderer _spriteRenderer;
+    private Movement _movement;
+    private float _movementInWater;
+    private bool _isInWater;
     private new void Awake()
     {
         base.Awake();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        #region Singleton
 
         if (Instance != null)
         {
@@ -19,29 +42,20 @@ public class Player : Character
         }
 
         Instance = this;
+        #endregion
     }
 
-    #endregion
-
-    public float PlayerRange
+    private void Start()
     {
-        get { return playerRange; }
-        set { playerRange = value; }
-    }
-
-    [SerializeField] 
-    private float playerRange; //Defines transform.scale in each direction 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        _movement = GetComponent<Movement>();
+        _movement.MovementSpeed = statistics.movementSpeed;
+        _movementInWater = statistics.movementSpeed / 2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ActivatePlayerRange()

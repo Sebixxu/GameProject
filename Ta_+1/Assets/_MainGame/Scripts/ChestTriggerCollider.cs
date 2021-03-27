@@ -5,14 +5,26 @@ using UnityEngine;
 
 public class ChestTriggerCollider : MonoBehaviour
 {
+    [SerializeField]
+    private float timeoutForDestroy;
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        //IPlayer player = collider.GetComponent<IPlayer>();
+        var player = collider.GetComponent<Player>();
 
-        //if (player != null)
-        //{
-        //    Debug.Log("OPENING LECIMY");
-        //    //collider.enabled = false; zróbic to na poszczególnym a nie na grupie
-        //}
+        if (player != null)
+        {
+            Debug.Log("OPENING LECIMY");
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+            StartCoroutine(WaitToDestroy());
+        }
+    }
+
+    private IEnumerator WaitToDestroy()
+    {
+        yield return new WaitForSeconds(timeoutForDestroy);
+
+        Destroy(gameObject);
     }
 }

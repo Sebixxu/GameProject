@@ -9,6 +9,8 @@ TagManager:
   - Tile
   - Tower
   - PlayerSpawn
+  - Rock
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -18,8 +20,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Player
+  - Rock
   - 
   - 
   - 
@@ -45,4 +47,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Rock
+    uniqueID: 2564105327
+    locked: 0
+  - name: Player
+    uniqueID: 1427264345
     locked: 0
