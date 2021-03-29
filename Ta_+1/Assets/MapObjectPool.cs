@@ -24,6 +24,11 @@ public class MapObjectPool : Singleton<MapObjectPool>
 
     public HoleObject[] HoleObjects => holeObjects;
 
+    [SerializeField]
+    private MapBorderObject[] mapBorderObject;
+
+    public MapBorderObject[] MapBorderObject => mapBorderObject;
+
     //[SerializeField] //Sadge że Unity tego nie wspiera
     //private ITileObject[] tileObjects;
 

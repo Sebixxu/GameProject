@@ -777,31 +777,31 @@ MonoBehaviour:
   _combatPointsText: {fileID: 791939936}
   _maxCombatPoints: 10
   tilePrefabs:
-  - {fileID: 6527691297971894355, guid: 2f71a2a7a7a0ace4e83087cee4ce9fd9, type: 3}
-  - {fileID: 8041351362580689283, guid: 0b7a301ec3d95dd4da0ea8040bed3c7f, type: 3}
-  - {fileID: 7932722395129047761, guid: f973bd07a932cc4449447d68a0236b1b, type: 3}
-  - {fileID: 1440233328200851772, guid: d9bad22ff2ecfc648a091824b30feb8f, type: 3}
-  - {fileID: 5930547806263898797, guid: 0ad96aa181cf9a446afc4c82d075847f, type: 3}
-  - {fileID: 4521787252820257270, guid: a61c6dfef6a0bad438292eb61e938908, type: 3}
-  - {fileID: 4430458971531444348, guid: 5a9fdbdd67f7bc142bd8a4798a5db3e2, type: 3}
-  - {fileID: 6395077737008235318, guid: 86c18f9281ee8f04e84c463ee8e697ff, type: 3}
-  - {fileID: 3730062000923929664, guid: 820eb0c604b3e12469821d5faa72b3c1, type: 3}
-  - {fileID: 4549574051437830334, guid: a680343fb5d37be40ae85cf9a5d68b3b, type: 3}
-  - {fileID: 8873751318424220331, guid: 84e65d14baf0b974b8bfc33f4c722a56, type: 3}
-  - {fileID: 5570786911051969278, guid: 9381300f85c74a040aaa39757dbb0ca8, type: 3}
-  - {fileID: 8837355985722864498, guid: 1d6128b8979eeb9468c36279aba500dc, type: 3}
-  - {fileID: 4861456846758436272, guid: 8dc821655bfcd2547a526eaed03e0d21, type: 3}
-  - {fileID: 1042153552824910576, guid: 064d8e37fdb6ed9439f3e08c409a8e0c, type: 3}
-  - {fileID: 1494749191146111141, guid: 71efe945dba8a764da9cc89a8078a99e, type: 3}
+  - {fileID: 1667322401039830640, guid: 5de6ce3b9e0f1034e80a1d9d2cc33471, type: 3}
+  - {fileID: 3509470616009342591, guid: ebcb3bc85567bd64988cf8d07c466d8b, type: 3}
+  - {fileID: 939866282604233318, guid: c67b61daa2431eb4ebcffc45977fc078, type: 3}
+  - {fileID: 6770875487090593997, guid: 91a280b8487730b428730f5d657a5a7a, type: 3}
+  - {fileID: 7219247733704731323, guid: 84245e5fac52d8346a06c532325fd2eb, type: 3}
+  - {fileID: 2049136135007869199, guid: b295b1216c6e6ea41ac5b3d8932ab1f2, type: 3}
+  - {fileID: 4605537935511229901, guid: 24d741e80a36c534e92b3761f9ae9e49, type: 3}
+  - {fileID: 2684405178092366049, guid: 51c10d92430762044bfaa8dcde8a2338, type: 3}
+  - {fileID: 9026974991550547853, guid: 0afa1c85c3fdd8543bb664325bc75841, type: 3}
+  - {fileID: 5671027322588079772, guid: bd4f8d11235357d4da9cfda18066fcc4, type: 3}
+  - {fileID: 5406601061153191482, guid: 2d92e1dfe16eff949a2fe2d797f5c457, type: 3}
+  - {fileID: 5501344523154868846, guid: 5a6c93e181b9b0d40bd7e8ba9d56409e, type: 3}
+  - {fileID: 374970513828122515, guid: f71b0e73e5994f7479e1834209d61b70, type: 3}
+  - {fileID: 6813996020949268346, guid: 2c3a1792147729346919ab2895403b70, type: 3}
+  - {fileID: 8136430198780590365, guid: 0e8dc9b181884154b922c25771e95aba, type: 3}
+  - {fileID: 4126757320288549930, guid: b10deda0debab6d42a3404ed0773410d, type: 3}
   specialTilesModel:
   - tileChar: 80
     description: Player Spawn
-    specialTilePrefab: {fileID: 329388559257228278, guid: 678d9c22c8e0a7f4dbf8dda6ed68bb1b,
+    specialTilePrefab: {fileID: 3806274826829223026, guid: a2376953cb7520e4e81f2f347f57ea1f,
       type: 3}
     tileType: 1
   - tileChar: 77
     description: Monster Spawn
-    specialTilePrefab: {fileID: 7933109918654747868, guid: 0a68b9263f0903d47ad2506e5233ed5b,
+    specialTilePrefab: {fileID: 1401279753610233250, guid: 0a8d34eb73d415b40a5cb5ffdc38bf3c,
       type: 3}
     tileType: 2
   cameraMovement: {fileID: 519420030}
@@ -3022,12 +3022,27 @@ MonoBehaviour:
   rockObjects:
   - {fileID: 2300999004921293574, guid: 0d9b1aebd614a9c49a8ce8334db4372e, type: 3}
   - {fileID: 8821204603248097475, guid: b0b6ccd076a95f1478eac803077e055b, type: 3}
+  - {fileID: 6340158498512469529, guid: c4ee8c71ffe0cac4ebefcc3791c59538, type: 3}
   waterObjects:
   - {fileID: 1234016084346513313, guid: 6ef5df99ebbd178428a86db03221f359, type: 3}
+  - {fileID: 106206257280945608, guid: adff2b7b5a648fb4980687b22c4fd995, type: 3}
   chestObjects:
   - {fileID: 4886380383047740113, guid: ddecf40c803ea284dacfa0ff1754aec9, type: 3}
   holeObjects:
   - {fileID: 3223145769980503430, guid: 090cc296f977b6e4f9e086d6f0728ed0, type: 3}
+  - {fileID: 3029717651343465125, guid: 71c00d947acbe624db669be76676dc41, type: 3}
+  mapBorderObject:
+  - {fileID: 2445760063518892112, guid: 7208cd1ce79980a43a372c6752676c3e, type: 3}
+  - {fileID: 8951176426070456656, guid: 8e8b71ffff5b40441b7b8e76e9db1773, type: 3}
+  - {fileID: 7133386530184665149, guid: 97da8a2c90305e948a3b4d6b73f159b0, type: 3}
+  - {fileID: 7629340221363419474, guid: fe6bf30d5129939448de570ece6689d9, type: 3}
+  - {fileID: 8419561165278760159, guid: 3bd863906c4fc684db9ed00708b5c020, type: 3}
+  - {fileID: 5223296207036021798, guid: 438e9928235fe454c897261576d1fb8f, type: 3}
+  - {fileID: 3356460092223642055, guid: d8709c773fa2db4468924bbc72391262, type: 3}
+  - {fileID: 8360596990896983942, guid: 681cef084695fac44a1deab8553555f2, type: 3}
+  - {fileID: 4358801665685100509, guid: d28ad24a955950349be97897098f4e17, type: 3}
+  - {fileID: 1349095612578409061, guid: c35576de3ae76d84095e154c73a6ae26, type: 3}
+  - {fileID: 3222440453571093684, guid: fd20994f1e96f234196527bdf2e085d8, type: 3}
 --- !u!4 &995558806
 Transform:
   m_ObjectHideFlags: 0

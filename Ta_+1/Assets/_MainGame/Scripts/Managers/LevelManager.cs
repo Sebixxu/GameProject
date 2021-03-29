@@ -181,6 +181,10 @@ public class LevelManager : Singleton<LevelManager>
         {
             tileObject = MapObjectPool.Instance.HoleObjects.FirstOrDefault(o => o.TileNumber == tileNumber);
         }
+        else if (tileChar == 'B')
+        {
+            tileObject = MapObjectPool.Instance.MapBorderObject.FirstOrDefault(o => o.TileNumber == tileNumber);
+        }
 
         if (tileObject != null)
         {
@@ -206,7 +210,7 @@ public class LevelManager : Singleton<LevelManager>
                 sortingOrder = ++parentTileScript.GetComponent<SpriteRenderer>().sortingOrder;
                 parentTileScript.Setup(tileObject, false, true);
             }
-            else if (tileChar == 'H')
+            else if (tileChar == 'H' || tileChar == 'B')
             {
                 sortingOrder = ++parentTileScript.GetComponent<SpriteRenderer>().sortingOrder;
                 parentTileScript.Setup(tileObject, false, false);
