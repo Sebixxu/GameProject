@@ -11,6 +11,7 @@ TagManager:
   - PlayerSpawn
   - Rock
   - Water
+  - Hole
   layers:
   - Default
   - TransparentFX
