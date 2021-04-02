@@ -8,8 +8,7 @@ public abstract class Character : MonoBehaviour
     public bool IsActive { get; set; } = true;
     public bool IsAlive => health.CurrentValue > 0;
 
-    [SerializeField]
-    protected ExtendedStatistics statistics;
+    [SerializeField] protected ExtendedStatistics statistics;
 
     [SerializeField]
     private Stat health;

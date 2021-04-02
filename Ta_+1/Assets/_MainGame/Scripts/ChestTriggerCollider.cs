@@ -14,7 +14,7 @@ public class ChestTriggerCollider : MonoBehaviour
 
         if (player != null)
         {
-            Debug.Log("OPENING LECIMY");
+            Debug.Log("Zaraz zniknie");
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
             StartCoroutine(WaitToDestroy());
