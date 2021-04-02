@@ -26,12 +26,15 @@ public class Player : Character
 
     private SpriteRenderer _spriteRenderer;
     private Movement _movement;
+    private Inventory _inventory;
     private float _movementInWater;
     private bool _isInWater;
     private new void Awake()
     {
         base.Awake();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        _inventory = new Inventory();
 
         #region Singleton
 

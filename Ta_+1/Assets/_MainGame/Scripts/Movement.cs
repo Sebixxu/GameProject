@@ -19,17 +19,34 @@ public class Movement : MonoBehaviour
 
     private Vector2 _movement;
 
+    private Animator animator;
+
+    private static readonly int IsInMovement = Animator.StringToHash("IsInMovement");
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        _movement.x = Input.GetAxisRaw("Horizontal");
-        _movement.y = Input.GetAxisRaw("Vertical");
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            _movement.x = Input.GetAxisRaw("Horizontal");
+            _movement.y = Input.GetAxisRaw("Vertical");
+
+            animator.SetBool(IsInMovement, true);
+        }
+        else
+        {
+            _movement.x = 0;
+            _movement.y = 0;
+
+            animator.SetBool(IsInMovement, false);
+        }
+
     }
 
     private void FixedUpdate()

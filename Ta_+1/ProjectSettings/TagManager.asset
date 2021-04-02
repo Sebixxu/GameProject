@@ -49,8 +49,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Tiles
+    uniqueID: 3092506697
+    locked: 0
   - name: Rock
     uniqueID: 2564105327
+    locked: 0
+  - name: Water
+    uniqueID: 1917438205
     locked: 0
   - name: Player
     uniqueID: 1427264345

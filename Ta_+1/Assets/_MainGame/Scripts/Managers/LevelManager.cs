@@ -207,12 +207,14 @@ public class LevelManager : Singleton<LevelManager>
             }
             else if (tileChar == 'C')
             {
-                sortingOrder = ++parentTileScript.GetComponent<SpriteRenderer>().sortingOrder;
+                var order = parentTileScript.GetComponent<SpriteRenderer>().sortingOrder;
+                sortingOrder = ++order;
                 parentTileScript.Setup(tileObject, false, true);
             }
             else if (tileChar == 'H' || tileChar == 'B')
             {
-                sortingOrder = ++parentTileScript.GetComponent<SpriteRenderer>().sortingOrder;
+                var order = parentTileScript.GetComponent<SpriteRenderer>().sortingOrder;
+                sortingOrder = ++order;
                 parentTileScript.Setup(tileObject, false, false);
             }
 
