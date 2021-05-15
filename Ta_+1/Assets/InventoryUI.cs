@@ -7,10 +7,18 @@ using UnityEngine.UI;
 
 public class InventoryUI : Singleton<InventoryUI>
 {
+    //inv
+    private Transform itemSlots;
+
+    public Transform ItemSlots
+    {
+        get { return itemSlots; }
+        set { itemSlots = value; }
+    }
+
+
     private Inventory _inventory;
 
-    //Inv
-    private Transform itemSlots;
 
     //Eq
     private Transform weaponSlot;
@@ -45,8 +53,9 @@ public class InventoryUI : Singleton<InventoryUI>
         RefreshInventoryItems();
     }
 
-    private void RefreshInventoryItems()
+    public void RefreshInventoryItems()
     {
+        //czyszczenie
         for (int i = 0; i < itemSlots.childCount; i++)
         {
             var currentSlot = itemSlots.GetChild(i);
@@ -59,36 +68,38 @@ public class InventoryUI : Singleton<InventoryUI>
             amountText.gameObject.SetActive(false);
         }
 
-        foreach (var inventoryItem in _inventory.Items.Select((value, i) => new { i, value }))
+        //rysowanie
+        foreach (var inventoryItem in _inventory.Items)
         {
-            var currentSlot = itemSlots.GetChild(inventoryItem.i);
+            if(inventoryItem.Value == null)
+                continue;
+
+            var currentSlot = itemSlots.GetChild(inventoryItem.Key);
+
             currentSlot.GetComponent<ButtonUI>().ClickFunc = () =>
             {
-                _inventory.UseItem(inventoryItem.value);
+                if(_inventory.Items.ContainsValue(inventoryItem.Value))
+                    _inventory.UseItem(inventoryItem.Value);
             };
 
             currentSlot.GetComponent<ButtonUI>().MouseRightClickFunc = () =>
             {
                 //TODO Pytanie czy napewno
-                _inventory.RemoveItem(inventoryItem.value);
+                if (_inventory.Items.ContainsValue(inventoryItem.Value))
+                    _inventory.DropItem(inventoryItem.Value, false);
             };
 
             var image = currentSlot.GetChild(0).GetComponent<Image>();
             image.color = new Color(255, 255, 255, 100);
-            image.sprite = inventoryItem.value.GetSprite();
+            image.sprite = inventoryItem.Value.GetSprite();
 
             var amountText = currentSlot.GetChild(1);
             var text = amountText.GetComponent<Text>();
-            if (inventoryItem.value.amount > 1)
+            if (inventoryItem.Value.amount > 1)
             {
-                text.text = inventoryItem.value.amount.ToString();
+                text.text = inventoryItem.Value.amount.ToString();
                 amountText.gameObject.SetActive(true);
             }
         }
-    }
-
-    private void RefreshEquipmentItems()
-    {
-
     }
 }

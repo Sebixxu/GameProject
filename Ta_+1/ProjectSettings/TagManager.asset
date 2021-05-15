@@ -12,6 +12,7 @@ TagManager:
   - Rock
   - Water
   - Hole
+  - InventoryItemSlot
   layers:
   - Default
   - TransparentFX

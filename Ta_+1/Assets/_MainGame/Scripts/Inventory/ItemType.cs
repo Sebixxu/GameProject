@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum ItemType 
 {
+    None, //To raczej do wywalenia
     Sword,
     HealthPotion
 }

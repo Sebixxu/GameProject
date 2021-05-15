@@ -8,6 +8,14 @@ public class Player : Character
     public ExtendedStatistics Statistics => statistics;
     public float MovementInWater => _movementInWater;
 
+    private Inventory inventory;
+
+    public Inventory Inventory
+    {
+        get { return inventory; }
+        set { inventory = value; }
+    }
+
     public Movement Movement
     {
         get { return _movement; }
@@ -26,7 +34,6 @@ public class Player : Character
 
     private SpriteRenderer _spriteRenderer;
     private Movement _movement;
-    private Inventory _inventory;
     private InventoryUI inventoryUi;
     private float _movementInWater;
     private bool _isInWater;
@@ -35,10 +42,10 @@ public class Player : Character
         base.Awake();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
-        _inventory = new Inventory(UseItem);
+        inventory = new Inventory(UseItem);
         inventoryUi = InventoryUI.Instance;
 
-        inventoryUi.SetInventory(_inventory);
+        inventoryUi.SetInventory(inventory);
 
         #region Singleton
 
@@ -80,7 +87,7 @@ public class Player : Character
         {
             Debug.Log("Otwieram skrzynkę");
 
-            _inventory.AddItem(new Item { amount = 2, itemType = ItemType.HealthPotion });
+            inventory.AddItem(new Item { amount = 2, itemType = ItemType.HealthPotion });
         }
     }
 
@@ -91,7 +98,7 @@ public class Player : Character
             case ItemType.HealthPotion:
                 Debug.Log("Using HP pot.");
                 FlashRedColor();
-                _inventory.RemoveItem(item);
+                inventory.DropItem(item, false);
                 break;
         }
     }
