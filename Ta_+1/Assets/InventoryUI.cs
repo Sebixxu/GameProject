@@ -82,6 +82,16 @@ public class InventoryUI : Singleton<InventoryUI>
                     _inventory.UseItem(inventoryItem.Value);
             };
 
+            currentSlot.GetComponent<ButtonUI>().MouseLeftClickWithLeftCtrlFunc = () =>
+            {
+                Debug.Log("Left Click + Left Ctrl"); //CLICK, NO DROP
+            };
+
+            currentSlot.GetComponent<ButtonUI>().MouseLeftClickWithLeftAltFunc = () =>
+            {
+                Debug.Log("Left Click + Left Alt"); //CLICK, NO DROP
+            };
+
             currentSlot.GetComponent<ButtonUI>().MouseRightClickFunc = () =>
             {
                 //TODO Pytanie czy napewno

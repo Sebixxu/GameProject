@@ -6,6 +6,7 @@ using UnityEngine;
 //[Serializable] //DEBUG only
 public class Item
 {
+    public string name;
     public ItemType itemType;
     public int amount;
 
