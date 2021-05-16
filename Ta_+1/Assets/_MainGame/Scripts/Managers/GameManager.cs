@@ -187,14 +187,24 @@ public class GameManager : Singleton<GameManager>
         if (!inGameMenu.activeSelf)
         {
             pauseButton.GetComponent<ChangeableImageButton>().SetDefaultSprite(); //Reset PauseButton state
-            pauseButton.SetActivePauseBlockImageState(false);
+            TurnOffPauseBlockImage();
             ResumeGame();
         }
         else
         {
-            pauseButton.SetActivePauseBlockImageState(true);
+            TurnOnPauseBlockImage();
             PauseGame();
         }
+    }
+
+    public void TurnOnPauseBlockImage()
+    {
+        pauseButton.SetActivePauseBlockImageState(true);
+    }
+
+    public void TurnOffPauseBlockImage()
+    {
+        pauseButton.SetActivePauseBlockImageState(false);
     }
 
     public void PauseGame()

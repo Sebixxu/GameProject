@@ -22,6 +22,8 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     public Action ClickFunc = null;
+    public Action MouseLeftClickWithLeftCtrlFunc = null;
+    public Action MouseLeftClickWithLeftAltFunc = null;
     public Action MouseRightClickFunc = null;
     public Action MouseMiddleClickFunc = null;
     public Action MouseDownOnceFunc = null;
@@ -68,39 +70,55 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        if (internalOnPointerEnterFunc != null) internalOnPointerEnterFunc();
+        internalOnPointerEnterFunc?.Invoke();
         if (hoverBehaviour_Move) transform.localPosition = posEnter;
-        if (hoverBehaviourFunc_Enter != null) hoverBehaviourFunc_Enter();
-        if (MouseOverOnceFunc != null) MouseOverOnceFunc();
-        if (MouseOverOnceTooltipFunc != null) MouseOverOnceTooltipFunc();
+        hoverBehaviourFunc_Enter?.Invoke();
+        MouseOverOnceFunc?.Invoke();
+        MouseOverOnceTooltipFunc?.Invoke();
         mouseOver = true;
         mouseOverPerSecFuncTimer = 0f;
     }
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        if (internalOnPointerExitFunc != null) internalOnPointerExitFunc();
+        internalOnPointerExitFunc?.Invoke();
         if (hoverBehaviour_Move) transform.localPosition = posExit;
-        if (hoverBehaviourFunc_Exit != null) hoverBehaviourFunc_Exit();
-        if (MouseOutOnceFunc != null) MouseOutOnceFunc();
-        if (MouseOutOnceTooltipFunc != null) MouseOutOnceTooltipFunc();
+        hoverBehaviourFunc_Exit?.Invoke();
+        MouseOutOnceFunc?.Invoke();
+        MouseOutOnceTooltipFunc?.Invoke();
         mouseOver = false;
     }
+
     public virtual void OnPointerClick(PointerEventData eventData)
     {
-        if (internalOnPointerClickFunc != null) internalOnPointerClickFunc();
-        if (OnPointerClickFunc != null) OnPointerClickFunc(eventData);
+        internalOnPointerClickFunc?.Invoke();
+
+        switch (eventData.button)
+        {
+            case PointerEventData.InputButton.Left when Input.GetKey(KeyCode.LeftControl):
+                MouseLeftClickWithLeftCtrlFunc?.Invoke();
+                break;
+            case PointerEventData.InputButton.Left when Input.GetKey(KeyCode.LeftAlt):
+                MouseLeftClickWithLeftAltFunc?.Invoke();
+                break;
+            default:
+                OnPointerClickFunc?.Invoke(eventData);
+                break;
+        }
+
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             if (triggerMouseOutFuncOnClick)
             {
                 OnPointerExit(eventData);
             }
-            if (ClickFunc != null) ClickFunc();
+
+            ClickFunc?.Invoke();
         }
+
         if (eventData.button == PointerEventData.InputButton.Right)
-            if (MouseRightClickFunc != null) MouseRightClickFunc();
+            MouseRightClickFunc?.Invoke();
         if (eventData.button == PointerEventData.InputButton.Middle)
-            if (MouseMiddleClickFunc != null) MouseMiddleClickFunc();
+            MouseMiddleClickFunc?.Invoke();
     }
     public void Manual_OnPointerExit()
     {
@@ -112,26 +130,27 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (MouseDownOnceFunc != null) MouseDownOnceFunc();
+        MouseDownOnceFunc?.Invoke();
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (MouseUpFunc != null) MouseUpFunc();
+        MouseUpFunc?.Invoke();
     }
 
     void Update()
     {
         if (mouseOver)
         {
-            if (MouseOverFunc != null) MouseOverFunc();
+            MouseOverFunc?.Invoke();
             mouseOverPerSecFuncTimer -= Time.unscaledDeltaTime;
             if (mouseOverPerSecFuncTimer <= 0)
             {
                 mouseOverPerSecFuncTimer += 1f;
-                if (MouseOverPerSecFunc != null) MouseOverPerSecFunc();
+                MouseOverPerSecFunc?.Invoke();
             }
         }
-        if (MouseUpdate != null) MouseUpdate();
+
+        MouseUpdate?.Invoke();
 
         isSet = MouseOverOnceFunc != null;
 
